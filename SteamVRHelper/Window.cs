@@ -1,152 +1,175 @@
 using System.Diagnostics;
 
-
 namespace SteamVRHelper
 {
     public partial class Window : Form
     {
-        private string oculesPath = @"C:\Program Files\Oculus\Support\oculus-dash\dash\bin\";
-        private string oculesFile = "OculusDash.exe";
-        private string backupExtension = ".bak";
-        private string tempExtension = ".temp";
-
-        private string activeFilePath;
-        private string backupFilePath;
-        private string tempFilePath;
-
-        private bool hasOculusKiller;
-        private int service;
-            // 0 = SteamVR
-            // 1 = Oculus
+        private Service service = new();
+        private OpenVR openVR = new();
+        private Library library = new();
 
         public Window()
         {
             InitializeComponent();
 
+            Locations.CreateDirectory(Locations.BackupDirectory);
+            Locations.CreateDirectory(Locations.GamesBackupDirectory);
+            Locations.CreateDirectory(Locations.OculusBackupDirectory);
+            Locations.CreateDirectory(Locations.TemplateDirectory);
+
+            #region Service
+
             btnGetSteamVR.Visible = false;
 
-            activeFilePath = oculesPath + oculesFile;
-            backupFilePath = oculesPath + oculesFile + backupExtension;
-            tempFilePath   = oculesPath + oculesFile + tempExtension;
-
-            if(File.Exists(backupFilePath))
+            if (!File.Exists(Locations.OculusFile))
             {
-                hasOculusKiller = true;
-
-                int activeFileSize = File.ReadAllBytes(activeFilePath).Length;
-                int backupFileSize = File.ReadAllBytes(backupFilePath).Length;
-
-                if (activeFileSize > backupFileSize)
+                gbxService.Enabled = false;
+                rbtnSteamVR.Checked = true;
+            }
+            else
+            {
+                if (service.Inited)
                 {
-                    service = 1;
-                    rbtnOculus.Checked = true;
+                    if (service.ActiveService == VRService.SteamVR)
+                    {
+                        rbtnSteamVR.Checked = true;
+                    }
+                    else
+                    {
+                        rbtnOculus.Checked = true;
+                    }
                 }
                 else
                 {
-                    service = 0;
-                    rbtnSteamVR.Checked = true;
+                    rbtnSteamVR.Enabled = false;
+                    rbtnOculus.Checked = true;
+                    btnGetSteamVR.Visible = true;
                 }
+            }
+
+            #endregion
+
+            #region OpenVR
+
+            if (!openVR.Inited)
+            {
+                btnGetUpscaling.Visible = true;
+                chbxEnableUpscaling.Enabled = false;
+                gbxUpscaling.Enabled = false;
             } 
             else
             {
-                hasOculusKiller = false;
-                rbtnSteamVR.Enabled = false;
-                rbtnOculus.Checked = true;
-                btnGetSteamVR.Visible = true;
+                if (openVR.Upscaler == OpenVRUpscaler.FSR)
+                {
+                    rbtnFSR.Checked = true;
+                }
+                else
+                {
+                    rbtnNIS.Checked = true;
+                }
+
+                tbrRenderScale.Value = openVR.RenderScale;
+                tbrSharpness.Value = openVR.Sharpness;
+
+                btnGetUpscaling.Visible = false;
+                chlbxUpscaledGames.Enabled = false;
+
+                lblRenderScaleValue.Text = ((double)tbrRenderScale.Value / 100).ToString();
+                lblSharpnessValue.Text = ((double)tbrSharpness.Value / 100).ToString();
+
+                if (Directory.GetDirectories(Locations.GamesBackupDirectory).Length > 0)
+                {
+                    chbxEnableUpscaling.Checked = true;
+                }
+
+                if (!chbxEnableUpscaling.Checked)
+                {
+                    gbxUpscaling.Enabled = false;
+                }
+
+                foreach (Game game in library.Games)
+                {
+                    //chlbxUpscaledGames.Items.Add(game.Name, game.Scaled);
+                    chlbxUpscaledGames.Items.Add(game.Name, true);
+                }
             }
+
+            #endregion
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            ExitVR();
-        }
-
-        public void ExitVR()
-        {
-            KillProgram("OculusClient");
-            KillProgram("vrmonitor");
+            service.Exit();
         }
 
         private void rbtnService_Changed(object sender, EventArgs e)
         {
-            if(hasOculusKiller)
+            if(service.Inited)
             {
-                if (rbtnOculus.Checked && service != 1)
+                if (rbtnSteamVR.Checked)
                 {
-                    SwapFiles();
+                    service.ActivateSteamVR();
                 }
-                else if (rbtnSteamVR.Checked && service != 0)
+                else if (rbtnOculus.Checked)
                 {
-                    SwapFiles();
+                    service.ActivateOculus();
                 }
             }
         }
 
-        public void SwapFiles()
+        private void rbtnOpenVR_Changed(object sender, EventArgs e)
         {
-            try
+            if (rbtnFSR.Checked && openVR.Upscaler != OpenVRUpscaler.FSR)
             {
-                File.Move(activeFilePath, tempFilePath);
-                File.Move(backupFilePath, activeFilePath);
-                File.Move(tempFilePath, backupFilePath);
-
-                int activeFileSize = File.ReadAllBytes(activeFilePath).Length;
-                int backupFileSize = File.ReadAllBytes(backupFilePath).Length;
-
-                if (activeFileSize > backupFileSize)
-                {
-                    service = 1;
-                }
-                else
-                {
-                    service = 0;
-                }
+                openVR.Upscaler = OpenVRUpscaler.FSR;
             }
-            catch (Exception)
+            else if (rbtnNIS.Checked && openVR.Upscaler != OpenVRUpscaler.NIS)
             {
-                MessageBox.Show("Couldn't change service.\nPlease run as administrator.");
+                openVR.Upscaler = OpenVRUpscaler.NIS;
             }
         }
 
-        public void KillProgram(string name)
+        private void chbxEnableUpscaling_CheckedChanged(object sender, EventArgs e)
         {
-            Process[]? processes = null;
+            gbxUpscaling.Enabled = chbxEnableUpscaling.Checked;
 
-            try
+            if(chbxEnableUpscaling.Checked)
             {
-                processes = Process.GetProcessesByName(name);
-
-                if (processes.Length < 1)
-                {
-                    return;
-                }
-
-                Process process = processes[0];
-
-                if (!process.HasExited)
-                {
-                    process.Kill();
-                }
+                openVR.Backup();
             }
-            finally
+            else
             {
-                if (processes != null)
-                {
-                    foreach (Process process in processes)
-                    {
-                        process.Dispose();
-                    }
-                }
+                openVR.Restore();
             }
+        }
+
+        private void tbrRenderScale_Scroll(object sender, EventArgs e)
+        {
+            int value = tbrRenderScale.Value;
+            lblRenderScaleValue.Text = ((double)value / 100).ToString();
+            openVR.RenderScale = value;
+        }
+
+        private void tbrSharpness_Scroll(object sender, EventArgs e)
+        {
+            int value = tbrSharpness.Value;
+            lblSharpnessValue.Text = ((double)value / 100).ToString();
+            openVR.Sharpness = value;
+        }
+
+        private void btnApplyUpscaling_Click(object sender, EventArgs e)
+        {
+            openVR.Save();
         }
 
         private void btnGetSteamVR_Click(object sender, EventArgs e)
         {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = "https://github.com/ItsKaitlyn03/OculusKiller",
-                UseShellExecute = true
-            });
+            Link.Open("https://github.com/ItsKaitlyn03/OculusKiller/releases/latest");
+        }
+
+        private void btnGetUpscaling_Click(object sender, EventArgs e)
+        {
+            Link.Open("https://github.com/fholger/openvr_fsr/releases/latest");
         }
     }
 }
