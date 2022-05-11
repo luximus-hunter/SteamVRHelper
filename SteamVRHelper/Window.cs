@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System.Security.Principal;
 
 namespace SteamVRHelper
 {
@@ -18,6 +18,12 @@ namespace SteamVRHelper
             Locations.CreateDirectory(Locations.TemplateDirectory);
 
             #region Service
+
+            if (!IsAdministrator())
+            {
+                gbxService.Text += " - Run as administrator";
+                gbxService.Enabled = false;
+            }
 
             btnGetSteamVR.Visible = false;
 
@@ -72,7 +78,7 @@ namespace SteamVRHelper
                 tbrSharpness.Value = openVR.Sharpness;
 
                 btnGetUpscaling.Visible = false;
-                chlbxUpscaledGames.Enabled = false;
+                //chlbxUpscaledGames.Enabled = false;
 
                 lblRenderScaleValue.Text = ((double)tbrRenderScale.Value / 100).ToString();
                 lblSharpnessValue.Text = ((double)tbrSharpness.Value / 100).ToString();
@@ -95,6 +101,13 @@ namespace SteamVRHelper
             }
 
             #endregion
+        }
+
+        public static bool IsAdministrator()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
         private void btnExit_Click(object sender, EventArgs e)

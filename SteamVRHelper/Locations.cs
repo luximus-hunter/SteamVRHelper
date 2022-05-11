@@ -35,6 +35,7 @@ namespace SteamVRHelper
 
         public static string OpenvrDllFileName = "openvr_api.dll";
         public static string OpenvrConfigFileName = "openvr_mod.cfg";
+        public static string OpenvrLogFileName = "openvr_mod.log";
         public static string OpenvrDllFile = Path.Combine(TemplateDirectory, OpenvrDllFileName);
         public static string OpenvrConfigFile = Path.Combine(TemplateDirectory, OpenvrConfigFileName);
 

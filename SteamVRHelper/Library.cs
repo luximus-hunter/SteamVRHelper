@@ -14,27 +14,37 @@
             {
                 Game game = new Game();
 
-                game.Name = unsortedGame.Split(@"\")[unsortedGame.Split(@"\").Length - 1];
+                game.Name = unsortedGame.Split(@"\").Last();
 
-                string unityPath = Path.Combine(unsortedGame, game.Name + "_Data", @"Plugins\x86_64");
-                string unrealPath = Path.Combine(unsortedGame, @"Engine\Binaries\ThirdParty\OpenVR\OpenVRvX_Y_Z");
-
-                bool isUnity = File.Exists(Path.Combine(unityPath, Locations.OpenvrDllFileName));
-                bool isUnreal = File.Exists(Path.Combine(unrealPath, Locations.OpenvrDllFileName));
-
-                bool isOpenvr = File.Exists(Path.Combine(unityPath, Locations.OpenvrDllFileName)) ||
-                              File.Exists(Path.Combine(unrealPath, Locations.OpenvrDllFileName));
-
-                if (isUnity)
+                foreach (string openvrPath in Directory.EnumerateFiles(unsortedGame, Locations.OpenvrDllFileName, SearchOption.AllDirectories))
                 {
-                    game.Path = unityPath;
+                    List<string> pathSegments = openvrPath.Split(@"\").ToList();
+                    pathSegments.Remove(Locations.OpenvrDllFileName);
+                    string path = string.Join(@"\", pathSegments);
+
+                    game.Paths.Add(path);
                     game.Scaleable = true;
                 }
-                else if (isUnreal)
-                {
-                    game.Path = unrealPath;
-                    game.Scaleable = true;
-                }
+
+                //string unityPath = Path.Combine(unsortedGame, game.Name + "_Data", @"Plugins\x86_64");
+                //string unrealPath = Path.Combine(unsortedGame, @"Engine\Binaries\ThirdParty\OpenVR\OpenVRvX_Y_Z");
+
+                //bool isUnity = File.Exists(Path.Combine(unityPath, Locations.OpenvrDllFileName));
+                //bool isUnreal = File.Exists(Path.Combine(unrealPath, Locations.OpenvrDllFileName));
+
+                //bool isOpenvr = File.Exists(Path.Combine(unityPath, Locations.OpenvrDllFileName)) ||
+                //              File.Exists(Path.Combine(unrealPath, Locations.OpenvrDllFileName));
+
+                //if (isUnity)
+                //{
+                //    game.Path = unityPath;
+                //    game.Scaleable = true;
+                //}
+                //else if (isUnreal)
+                //{
+                //    game.Path = unrealPath;
+                //    game.Scaleable = true;
+                //}
 
                 if (game.Scaleable)
                 {
@@ -71,9 +81,17 @@
     internal class Game
     {
         private string name;
-        private string path;
+        private List<string> paths;
         private bool scaleable;
         private bool scaled;
+
+        public Game()
+        {
+            name = "Untitled Game";
+            scaleable = false;
+            scaled = false;
+            paths = new();
+        }
 
         #region Getters and Setters
 
@@ -83,10 +101,10 @@
             set => name = value;
         }
 
-        public string Path
+        public List<string> Paths
         {
-            get => path;
-            set => path = value;
+            get => paths;
+            set => paths = value;
         }
 
         public bool Scaleable

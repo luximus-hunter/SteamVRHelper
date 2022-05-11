@@ -25,44 +25,53 @@
                 inited = true;
             }
 
-            library = new Library();
-
-            config = File.ReadAllLines(Locations.OpenvrConfigFile).ToList();
-
-            #region Read Config
-
-            if (CheckConfigLine(9, "true"))
+            if (inited)
             {
-                upscaler = OpenVRUpscaler.NIS;
-            }
-            else
-            {
-                upscaler = OpenVRUpscaler.FSR;
-            }
+                library = new Library();
 
-            renderScale = ReadConfigLine(21);
-            sharpness = ReadConfigLine(24);
+                config = File.ReadAllLines(Locations.OpenvrConfigFile).ToList();
 
-            #endregion
+                #region Read Config
+
+                if (CheckConfigLine(9, "true"))
+                {
+                    upscaler = OpenVRUpscaler.NIS;
+                }
+                else
+                {
+                    upscaler = OpenVRUpscaler.FSR;
+                }
+
+                renderScale = ReadConfigLine(21);
+                sharpness = ReadConfigLine(24);
+
+                #endregion
+            }
         }
 
         public void Backup()
         {
             foreach (Game game in library.Games)
             {
-                string backupDirectory = Path.Combine(Locations.GamesBackupDirectory, game.Name);
-                string backupFile = Path.Combine(backupDirectory, Locations.OpenvrDllFileName);
-
-                if (!File.Exists(backupFile))
+                foreach (string path in game.Paths)
                 {
-                    Directory.CreateDirectory(backupDirectory);
-                    File.Copy(Path.Combine(game.Path, Locations.OpenvrDllFileName), backupFile);
-                }
+                    int index = game.Paths.IndexOf(path);
 
-                File.Delete(Path.Combine(game.Path, Locations.OpenvrDllFileName));
+                    string backupDirectory = Path.Combine(Locations.GamesBackupDirectory, game.Name, index.ToString());
+                    string backupFile = Path.Combine(backupDirectory, Locations.OpenvrDllFileName);
 
-                File.Copy(Locations.OpenvrDllFile, Path.Combine(game.Path, Locations.OpenvrDllFileName), true); 
-                File.Copy(Locations.OpenvrConfigFile, Path.Combine(game.Path, Locations.OpenvrConfigFileName), true);
+                    if (!File.Exists(backupFile))
+                    {
+                        Directory.CreateDirectory(backupDirectory);
+                        File.Copy(Path.Combine(path, Locations.OpenvrDllFileName), backupFile);
+                    }
+
+                    File.Delete(Path.Combine(path, Locations.OpenvrDllFileName));
+                    
+
+                    File.Copy(Locations.OpenvrDllFile, Path.Combine(path, Locations.OpenvrDllFileName), true);
+                    File.Copy(Locations.OpenvrConfigFile, Path.Combine(path, Locations.OpenvrConfigFileName), true);
+                }                
             }            
         }
 
@@ -70,14 +79,22 @@
         {
             foreach (Game game in library.Games)
             {
-                string backupDirectory = Path.Combine(Locations.GamesBackupDirectory, game.Name);
-                string backupFile = Path.Combine(backupDirectory, Locations.OpenvrDllFileName);
+                foreach (string path in game.Paths)
+                {
+                    int index = game.Paths.IndexOf(path);
 
-                File.Delete(Path.Combine(game.Path, Locations.OpenvrDllFileName));
-                File.Delete(Path.Combine(game.Path, Locations.OpenvrConfigFileName));
+                    string backupDirectory = Path.Combine(Locations.GamesBackupDirectory, game.Name, index.ToString());
+                    string backupFile = Path.Combine(backupDirectory, Locations.OpenvrDllFileName);
 
-                File.Move(backupFile, Path.Combine(game.Path, Locations.OpenvrDllFileName), true);
-                Directory.Delete(backupDirectory);
+                    File.Delete(Path.Combine(path, Locations.OpenvrDllFileName));
+                    File.Delete(Path.Combine(path, Locations.OpenvrConfigFileName));
+                    File.Delete(Path.Combine(path, Locations.OpenvrLogFileName));
+
+                    File.Move(backupFile, Path.Combine(path, Locations.OpenvrDllFileName), true);
+                    Directory.Delete(backupDirectory);
+                }
+
+                Directory.Delete(Path.Combine(Locations.GamesBackupDirectory, game.Name));
             }            
         }
 
@@ -93,7 +110,10 @@
 
                 foreach (Game game in library.Games)
                 {
-                    File.Copy(Locations.OpenvrConfigFile, Path.Combine(game.Path, Locations.OpenvrConfigFileName), true);
+                    foreach (string path in game.Paths)
+                    {
+                        File.Copy(Locations.OpenvrConfigFile, Path.Combine(path, Locations.OpenvrConfigFileName), true);
+                    }
                 }
             }
             catch (Exception)
