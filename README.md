@@ -58,13 +58,13 @@ Enabling this will use AMD FSR or NVidea NIS to render your games at a lower res
 The `Render Scale` is what percentage of the original resolution to render at.
 
 ```
-Default: `0.77`
+Default: 0.77
 ```
 
 The `Sharpness` is how much you want to sharpen the upscaled image, since it can lack detail in some cases
 
 ```
-Default: `0.9`
+Default: 0.9
 ```
 
 Clicking `Apply` will apply the changes to all the games displayed in the list on the right.
