@@ -57,7 +57,7 @@ namespace SteamVRHelper
             }
         }
 
-        public void Exit()
+        public static void Exit()
         {
             KillProgram("OculusClient");
             KillProgram("vrmonitor");
@@ -81,7 +81,7 @@ namespace SteamVRHelper
 
         #region KillProgram
 
-        public void KillProgram(string name)
+        public static void KillProgram(string name)
         {
             Process[]? processes = null;
 

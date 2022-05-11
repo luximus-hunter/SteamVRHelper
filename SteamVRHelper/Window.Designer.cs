@@ -39,8 +39,8 @@
             this.btnGetUpscaling = new System.Windows.Forms.Button();
             this.chbxEnableUpscaling = new System.Windows.Forms.CheckBox();
             this.gbxUpscaling = new System.Windows.Forms.GroupBox();
-            this.lblUpscaledGames = new System.Windows.Forms.Label();
-            this.chlbxUpscaledGames = new System.Windows.Forms.CheckedListBox();
+            this.lblScaledGames = new System.Windows.Forms.Label();
+            this.lbxUpscaledGames = new System.Windows.Forms.ListBox();
             this.lblSharpnessValue = new System.Windows.Forms.Label();
             this.lblRenderScaleValue = new System.Windows.Forms.Label();
             this.btnApplyUpscaling = new System.Windows.Forms.Button();
@@ -158,8 +158,8 @@
             // 
             // gbxUpscaling
             // 
-            this.gbxUpscaling.Controls.Add(this.lblUpscaledGames);
-            this.gbxUpscaling.Controls.Add(this.chlbxUpscaledGames);
+            this.gbxUpscaling.Controls.Add(this.lblScaledGames);
+            this.gbxUpscaling.Controls.Add(this.lbxUpscaledGames);
             this.gbxUpscaling.Controls.Add(this.lblSharpnessValue);
             this.gbxUpscaling.Controls.Add(this.lblRenderScaleValue);
             this.gbxUpscaling.Controls.Add(this.btnApplyUpscaling);
@@ -171,27 +171,28 @@
             this.gbxUpscaling.Controls.Add(this.rbtnFSR);
             this.gbxUpscaling.Location = new System.Drawing.Point(218, 12);
             this.gbxUpscaling.Name = "gbxUpscaling";
-            this.gbxUpscaling.Size = new System.Drawing.Size(385, 252);
+            this.gbxUpscaling.Size = new System.Drawing.Size(401, 252);
             this.gbxUpscaling.TabIndex = 8;
             this.gbxUpscaling.TabStop = false;
             this.gbxUpscaling.Text = "Upscaling Settings";
             // 
-            // lblUpscaledGames
+            // lblScaledGames
             // 
-            this.lblUpscaledGames.AutoSize = true;
-            this.lblUpscaledGames.Location = new System.Drawing.Point(203, 20);
-            this.lblUpscaledGames.Name = "lblUpscaledGames";
-            this.lblUpscaledGames.Size = new System.Drawing.Size(93, 16);
-            this.lblUpscaledGames.TabIndex = 11;
-            this.lblUpscaledGames.Text = "Upscaled Games";
+            this.lblScaledGames.AutoSize = true;
+            this.lblScaledGames.Location = new System.Drawing.Point(200, 23);
+            this.lblScaledGames.Name = "lblScaledGames";
+            this.lblScaledGames.Size = new System.Drawing.Size(79, 16);
+            this.lblScaledGames.TabIndex = 11;
+            this.lblScaledGames.Text = "Scaled Games";
             // 
-            // chlbxUpscaledGames
+            // lbxUpscaledGames
             // 
-            this.chlbxUpscaledGames.FormattingEnabled = true;
-            this.chlbxUpscaledGames.Location = new System.Drawing.Point(200, 39);
-            this.chlbxUpscaledGames.Name = "chlbxUpscaledGames";
-            this.chlbxUpscaledGames.Size = new System.Drawing.Size(174, 166);
-            this.chlbxUpscaledGames.TabIndex = 10;
+            this.lbxUpscaledGames.FormattingEnabled = true;
+            this.lbxUpscaledGames.ItemHeight = 16;
+            this.lbxUpscaledGames.Location = new System.Drawing.Point(200, 47);
+            this.lbxUpscaledGames.Name = "lbxUpscaledGames";
+            this.lbxUpscaledGames.Size = new System.Drawing.Size(195, 196);
+            this.lbxUpscaledGames.TabIndex = 10;
             // 
             // lblSharpnessValue
             // 
@@ -219,7 +220,7 @@
             // 
             this.btnApplyUpscaling.Location = new System.Drawing.Point(6, 220);
             this.btnApplyUpscaling.Name = "btnApplyUpscaling";
-            this.btnApplyUpscaling.Size = new System.Drawing.Size(368, 23);
+            this.btnApplyUpscaling.Size = new System.Drawing.Size(188, 23);
             this.btnApplyUpscaling.TabIndex = 7;
             this.btnApplyUpscaling.Text = "Apply";
             this.btnApplyUpscaling.UseVisualStyleBackColor = true;
@@ -295,7 +296,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 275);
+            this.ClientSize = new System.Drawing.Size(666, 275);
             this.Controls.Add(this.gbxUpscaling);
             this.Controls.Add(this.gbxEnableUpscaling);
             this.Controls.Add(this.gbxExit);
@@ -343,5 +344,7 @@
         private Button btnGetUpscaling;
         private Label lblUpscaledGames;
         private CheckedListBox chlbxUpscaledGames;
+        private Label lblScaledGames;
+        private ListBox lbxUpscaledGames;
     }
 }

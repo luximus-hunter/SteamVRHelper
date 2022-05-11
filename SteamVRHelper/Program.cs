@@ -9,10 +9,22 @@ namespace SteamVRHelper
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Window());
-       }
+            if (args.Contains("--exit"))
+            {
+                Service.Exit();
+            }
+            else
+            {
+                Locations.CreateDirectory(Locations.BackupDirectory);
+                Locations.CreateDirectory(Locations.GamesBackupDirectory);
+                Locations.CreateDirectory(Locations.OculusBackupDirectory);
+                Locations.CreateDirectory(Locations.TemplateDirectory);
+
+                ApplicationConfiguration.Initialize();
+                Application.Run(new Window());
+            }
+        }
     }
 }

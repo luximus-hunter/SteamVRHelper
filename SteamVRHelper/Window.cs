@@ -12,11 +12,6 @@ namespace SteamVRHelper
         {
             InitializeComponent();
 
-            Locations.CreateDirectory(Locations.BackupDirectory);
-            Locations.CreateDirectory(Locations.GamesBackupDirectory);
-            Locations.CreateDirectory(Locations.OculusBackupDirectory);
-            Locations.CreateDirectory(Locations.TemplateDirectory);
-
             #region Service
 
             if (!IsAdministrator())
@@ -95,8 +90,7 @@ namespace SteamVRHelper
 
                 foreach (Game game in library.Games)
                 {
-                    //chlbxUpscaledGames.Items.Add(game.Name, game.Scaled);
-                    chlbxUpscaledGames.Items.Add(game.Name, true);
+                    lbxUpscaledGames.Items.Add(game.Name);
                 }
             }
 
@@ -112,7 +106,7 @@ namespace SteamVRHelper
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            service.Exit();
+            Service.Exit();
         }
 
         private void rbtnService_Changed(object sender, EventArgs e)

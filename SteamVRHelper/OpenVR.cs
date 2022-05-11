@@ -67,7 +67,6 @@
                     }
 
                     File.Delete(Path.Combine(path, Locations.OpenvrDllFileName));
-                    
 
                     File.Copy(Locations.OpenvrDllFile, Path.Combine(path, Locations.OpenvrDllFileName), true);
                     File.Copy(Locations.OpenvrConfigFile, Path.Combine(path, Locations.OpenvrConfigFileName), true);
@@ -90,11 +89,8 @@
                     File.Delete(Path.Combine(path, Locations.OpenvrConfigFileName));
                     File.Delete(Path.Combine(path, Locations.OpenvrLogFileName));
 
-                    File.Move(backupFile, Path.Combine(path, Locations.OpenvrDllFileName), true);
-                    Directory.Delete(backupDirectory);
-                }
-
-                Directory.Delete(Path.Combine(Locations.GamesBackupDirectory, game.Name));
+                    File.Copy(backupFile, Path.Combine(path, Locations.OpenvrDllFileName), true);
+                }                
             }            
         }
 
