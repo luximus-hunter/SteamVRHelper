@@ -296,7 +296,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 275);
+            this.ClientSize = new System.Drawing.Size(630, 275);
             this.Controls.Add(this.gbxUpscaling);
             this.Controls.Add(this.gbxEnableUpscaling);
             this.Controls.Add(this.gbxExit);
