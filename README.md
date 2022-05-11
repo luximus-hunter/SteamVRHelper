@@ -41,7 +41,11 @@ To make it easier to exit SteamVR, you can add `SteamVRHelper.exe` as a non-Stea
 
 ![launch-options](./images/launch-options.png)
 
-When you click SteamVRHelper in the SteamVR library, it will close SteamVR and the Oculus client, bringing you to your Oculus Home
+When you click SteamVRHelper in the SteamVR library, it will close SteamVR and the Oculus client, bringing you to your Oculus Home.
+
+You can also add a custom artwork to `SteamVRHelper` so it looks nicer in the SteamVR library. You can make your own or download mine:
+
+![grid](./images/grid.png)
 
 ## Upscaling
 
