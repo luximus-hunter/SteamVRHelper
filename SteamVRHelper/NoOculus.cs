@@ -4,33 +4,23 @@ namespace SteamVRHelper
 {
     internal enum VRService
     {
-        SteamVR = 0,
+        Steam = 0,
         Oculus = 1
     }
 
-    internal class Service
+    internal class NoOculus
     {
         private VRService activeService;
 
-        private bool inited;
-
-        public Service()
+        public NoOculus()
         {
-            if(File.Exists(Locations.OculusFile) && !File.Exists(Locations.OculusBackupFile))
-            {
-                File.Copy(Locations.OculusFile, Locations.OculusBackupFile);
-            }
+            Backup();
 
-            if (File.Exists(Locations.OculusBackupFile) && File.Exists(Locations.OculusKillerFile))
-            {
-                inited = true;
-            }
-
-            if(inited)
+            if (DetectOculus() && DetectKiller())
             {
                 if (File.ReadAllBytes(Locations.OculusFile).Length == File.ReadAllBytes(Locations.OculusKillerFile).Length)
                 {
-                    activeService = VRService.SteamVR;
+                    activeService = VRService.Steam;
                 }
                 else
                 {
@@ -39,22 +29,37 @@ namespace SteamVRHelper
             }
         }
 
-        public void ActivateSteamVR()
+        public bool DetectOculus()
         {
-            if (File.ReadAllBytes(Locations.OculusFile).Length != File.ReadAllBytes(Locations.OculusKillerFile).Length)
+            return File.Exists(Locations.OculusFile);
+        }
+
+        public bool DetectKiller()
+        {
+            return File.Exists(Locations.OculusKillerFile);
+        }
+
+        public void Backup()
+        {
+            string activeFile = Locations.OculusFile;
+            string backupFile = Locations.OculusFile + Locations.BackupExtension;
+
+            if (!File.Exists(backupFile))
             {
-                File.Copy(Locations.OculusKillerFile, Locations.OculusFile, true);
-                activeService = VRService.SteamVR;
+                File.Copy(activeFile, backupFile, true);
             }
         }
 
-        public void ActivateOculus()
+        public void Enable()
         {
-            if (File.ReadAllBytes(Locations.OculusFile).Length != File.ReadAllBytes(Locations.OculusBackupFile).Length)
-            {
-                File.Copy(Locations.OculusBackupFile, Locations.OculusFile, true);
-                activeService = VRService.Oculus;
-            }
+            File.Copy(Locations.OculusKillerFile, Locations.OculusFile, true);
+            activeService = VRService.Steam;
+        }
+
+        public void Disable()
+        {
+            File.Copy(Locations.OculusBackupFile, Locations.OculusFile, true);
+            activeService = VRService.Oculus;
         }
 
         public static void Exit()
@@ -69,12 +74,6 @@ namespace SteamVRHelper
         {
             get => activeService;
             set => activeService = value;
-        }
-
-        public bool Inited
-        {
-            get => inited;
-            set => inited = value;
         }
 
         #endregion

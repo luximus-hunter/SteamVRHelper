@@ -13,13 +13,11 @@ namespace SteamVRHelper
         {
             if (args.Contains("--exit"))
             {
-                Service.Exit();
+                NoOculus.Exit();
             }
             else
             {
-                Locations.CreateDirectory(Locations.BackupDirectory);
-                Locations.CreateDirectory(Locations.GamesBackupDirectory);
-                Locations.CreateDirectory(Locations.OculusBackupDirectory);
+                Locations.CreateDirectory(Locations.Root);
                 Locations.CreateDirectory(Locations.TemplateDirectory);
 
                 ApplicationConfiguration.Initialize();

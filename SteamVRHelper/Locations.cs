@@ -4,15 +4,10 @@ namespace SteamVRHelper
 {
     internal static class Locations
     {
-        #region Backup
+        public static string Root = @"C:\SteamVRHelper";
+        public static string TemplateDirectory = Path.Combine(Root, "TemplateFiles");
 
-        public static string BackupDirectory = @".\BackupFiles";
-        public static string GamesBackupDirectory = Path.Combine(BackupDirectory, "Games");
-        public static string OculusBackupDirectory = Path.Combine(BackupDirectory, "Oculus");
-
-        #endregion
-
-        public static string TemplateDirectory = @".\TemplateFiles";
+        public static string BackupExtension = ".backup";
 
         #region Steam
 
@@ -27,7 +22,7 @@ namespace SteamVRHelper
         public static string OculusFileName = "OculusDash.exe";
         public static string OculusFile = Path.Combine(OculusDirectory, OculusFileName);
         public static string OculusKillerFile = Path.Combine(TemplateDirectory, OculusFileName);
-        public static string OculusBackupFile = Path.Combine(OculusBackupDirectory, OculusFileName);
+        public static string OculusBackupFile = Path.Combine(OculusDirectory, OculusFileName + BackupExtension);
 
         #endregion
 
