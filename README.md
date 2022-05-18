@@ -1,5 +1,7 @@
 # SteamVRHelper
 
+![open-source](https://img.shields.io/badge/open%20source-❤-FF0000)
+
 _A small tool to enhance performance in SteamVR_
 
 ![program](./images/program.png)
