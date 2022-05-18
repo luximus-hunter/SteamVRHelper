@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SteamVRHelperV2 (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SteamVRHelperV2 (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

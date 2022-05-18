@@ -1,0 +1,98 @@
+﻿<Page
+    x:Class="SteamVRHelperV2.Views.VrService"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SteamVRHelperV2.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    mc:Ignorable="d">
+
+    <StackPanel Orientation="Vertical" Margin="40,16,0,0">
+        <muxc:InfoBar Width="600"
+                      IsOpen="True"
+                      Severity="Error"
+                      Title="Oculus not detected"
+                      IsClosable="False"
+                      Message="This section is only availibe for Oculus users. It enables the option to skip the Oculus Dash when starting the link between PC and an Oculus headset."
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Left" 
+                      Margin="16"
+                      CornerRadius="8"
+                      BorderThickness="1"
+                      Padding="16" />
+        <Border Width="600" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left">VR Service</TextBlock>
+                <ComboBox ItemsSource="" 
+                          DisplayMemberPath="Item1" 
+                          SelectedValuePath="Item2"
+                          Width="200"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          VerticalAlignment="Center" 
+                          HorizontalAlignment="Right"/>
+                <Button Grid.Row="1"
+                        Grid.Column="1"
+                        Width="200"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource AccentButtonStyle}">
+                    Apply
+                </Button>
+            </Grid>
+        </Border>
+        <muxc:InfoBar Width="600"
+                      IsOpen="True"
+                      Severity="Warning"
+                      Title="Experimental"
+                      IsClosable="False"
+                      Message="The following feature(s) are experimental."
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Left" 
+                      Margin="16"
+                      CornerRadius="8"
+                      BorderThickness="1"
+                      Padding="16" />
+        <Border Width="600" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <CheckBox>
+                    Fix SteamVR not exiting
+                </CheckBox>
+            </Grid>
+        </Border>
+    </StackPanel>
+</Page>
