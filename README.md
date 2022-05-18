@@ -10,9 +10,7 @@ _A small tool to enhance performance in SteamVR_
 
 1. Download SteamVRHelper from the [releases tab](https://github.com/luximus-hunter/SteamVRHelper/releases/latest).
 2. Extract the `.zip` and put the folder somewhere safe. Placing it at `c:\Users\username\SteamVRHelper` is recommended.
-3. Run the program once and close it again. There should be two folders in the `SteamVRHelper` folder:
-    - `BackupFiles`
-    - `TemplateFiles`
+3. Run the program once and close it again. There should be a folder in your C: drive named `SteamVRHelper`, containing a folder named `TemplateFiles`.
 4. Download [OculusKiller](https://github.com/ItsKaitlyn03/OculusKiller/releases/latest) and place it in the `TemplateFiles` folder.
 5. Download [OpenVR_SFR](https://github.com/fholger/openvr_fsr/releases/latest). Extract the `.zip` and move the following two files to the `TemplateFiles` folder:
     - `openvr_api.dll`
