@@ -1,4 +1,9 @@
-﻿namespace SteamVRHelper
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace SteamVRHelper
 {
     internal enum UpscaleAlgorithm
     {
@@ -91,7 +96,7 @@
             }
             catch (Exception)
             {
-                MessageBox.Show("Couldn't save new config");
+                //MessageBox.Show("Couldn't save new config");
             }
 
             // Add config file to games

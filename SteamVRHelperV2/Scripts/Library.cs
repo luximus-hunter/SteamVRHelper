@@ -1,4 +1,8 @@
-﻿namespace SteamVRHelper
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace SteamVRHelper
 {
     internal class Library
     {
