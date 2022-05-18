@@ -1,6 +1,6 @@
 # SteamVRHelper
 
-![open-source](https://img.shields.io/badge/open%20source-❤-FF0000)
+![open-source](https://img.shields.io/badge/open%20source-❤-FF0000) ![version](https://img.shields.io/github/v/release/luximus-hunter/SteamVRHelper?label=version)
 
 _A small tool to enhance performance in SteamVR_
 
