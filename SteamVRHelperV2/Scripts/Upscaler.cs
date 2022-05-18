@@ -26,10 +26,11 @@ namespace SteamVRHelper
 
         private Library library;
 
-        public Upscaler() {
+        public Upscaler()
+        {
             Backup();
 
-            if(File.Exists(Path.Combine(Locations.OpenvrDllFile)) &&
+            if (File.Exists(Path.Combine(Locations.OpenvrDllFile)) &&
                File.Exists(Path.Combine(Locations.OpenvrConfigFile)))
             {
                 inited = true;
@@ -157,8 +158,8 @@ namespace SteamVRHelper
         /// </summary>
         public void Restore()
         {
-            Disable(); 
-            
+            Disable();
+
             foreach (Game game in library.Games)
             {
                 foreach (string path in game.Paths)
