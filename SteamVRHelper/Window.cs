@@ -4,8 +4,8 @@ namespace SteamVRHelper
 {
     public partial class Window : Form
     {
-        private Service service = new();
-        private OpenVR openVR = new();
+        private NoOculus noOculus = new();
+        private Upscaler upscaler = new();
         private Library library = new();
 
         public Window()
@@ -20,81 +20,50 @@ namespace SteamVRHelper
                 gbxService.Enabled = false;
             }
 
-            btnGetSteamVR.Visible = false;
-
-            if (!File.Exists(Locations.OculusFile))
+            if (!noOculus.DetectOculus())
             {
                 gbxService.Enabled = false;
-                rbtnSteamVR.Checked = true;
             }
-            else
-            {
-                if (service.Inited)
-                {
-                    if (service.ActiveService == VRService.SteamVR)
-                    {
-                        rbtnSteamVR.Checked = true;
-                    }
-                    else
-                    {
-                        rbtnOculus.Checked = true;
-                    }
-                }
-                else
-                {
-                    rbtnSteamVR.Enabled = false;
-                    rbtnOculus.Checked = true;
-                    btnGetSteamVR.Visible = true;
-                }
-            }
+
+            UpdateServiceLabel();
 
             #endregion
 
             #region OpenVR
 
-            if (!openVR.Inited)
+            if (upscaler.Algorithm == UpscaleAlgorithm.FSR)
             {
-                btnGetUpscaling.Visible = true;
-                chbxEnableUpscaling.Enabled = false;
-                gbxUpscaling.Enabled = false;
-            } 
+                rbtnFSR.Checked = true;
+            }
             else
             {
-                if (openVR.Upscaler == OpenVRUpscaler.FSR)
-                {
-                    rbtnFSR.Checked = true;
-                }
-                else
-                {
-                    rbtnNIS.Checked = true;
-                }
-
-                tbrRenderScale.Value = openVR.RenderScale;
-                tbrSharpness.Value = openVR.Sharpness;
-
-                btnGetUpscaling.Visible = false;
-                //chlbxUpscaledGames.Enabled = false;
-
-                lblRenderScaleValue.Text = ((double)tbrRenderScale.Value / 100).ToString();
-                lblSharpnessValue.Text = ((double)tbrSharpness.Value / 100).ToString();
-
-                if (Directory.GetDirectories(Locations.GamesBackupDirectory).Length > 0)
-                {
-                    chbxEnableUpscaling.Checked = true;
-                }
-
-                if (!chbxEnableUpscaling.Checked)
-                {
-                    gbxUpscaling.Enabled = false;
-                }
-
-                foreach (Game game in library.Games)
-                {
-                    lbxUpscaledGames.Items.Add(game.Name);
-                }
+                rbtnNIS.Checked = true;
             }
 
+            tbrRenderScale.Value = upscaler.RenderScale;
+            tbrSharpness.Value = upscaler.Sharpness;
+
+            lblRenderScaleValue.Text = ((double)tbrRenderScale.Value / 100).ToString();
+            lblSharpnessValue.Text = ((double)tbrSharpness.Value / 100).ToString();
+
+            foreach (Game game in library.Games)
+            {
+                lbxUpscaledGames.Items.Add(game.Name);
+            }
+            
             #endregion
+        }
+
+        private void UpdateServiceLabel()
+        {
+            if (noOculus.ActiveService == VRService.Steam)
+            {
+                lblActiveService.Text = "Active service: Steam";
+            }
+            else if (noOculus.ActiveService == VRService.Oculus)
+            {
+                lblActiveService.Text = "Active service: Oculus";
+            }
         }
 
         public static bool IsAdministrator()
@@ -106,47 +75,18 @@ namespace SteamVRHelper
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            Service.Exit();
-        }
-
-        private void rbtnService_Changed(object sender, EventArgs e)
-        {
-            if(service.Inited)
-            {
-                if (rbtnSteamVR.Checked)
-                {
-                    service.ActivateSteamVR();
-                }
-                else if (rbtnOculus.Checked)
-                {
-                    service.ActivateOculus();
-                }
-            }
+            NoOculus.Exit();
         }
 
         private void rbtnOpenVR_Changed(object sender, EventArgs e)
         {
-            if (rbtnFSR.Checked && openVR.Upscaler != OpenVRUpscaler.FSR)
+            if (rbtnFSR.Checked && upscaler.Algorithm != UpscaleAlgorithm.FSR)
             {
-                openVR.Upscaler = OpenVRUpscaler.FSR;
+                upscaler.Algorithm = UpscaleAlgorithm.FSR;
             }
-            else if (rbtnNIS.Checked && openVR.Upscaler != OpenVRUpscaler.NIS)
+            else if (rbtnNIS.Checked && upscaler.Algorithm != UpscaleAlgorithm.NIS)
             {
-                openVR.Upscaler = OpenVRUpscaler.NIS;
-            }
-        }
-
-        private void chbxEnableUpscaling_CheckedChanged(object sender, EventArgs e)
-        {
-            gbxUpscaling.Enabled = chbxEnableUpscaling.Checked;
-
-            if(chbxEnableUpscaling.Checked)
-            {
-                openVR.Backup();
-            }
-            else
-            {
-                openVR.Restore();
+                upscaler.Algorithm = UpscaleAlgorithm.NIS;
             }
         }
 
@@ -154,29 +94,51 @@ namespace SteamVRHelper
         {
             int value = tbrRenderScale.Value;
             lblRenderScaleValue.Text = ((double)value / 100).ToString();
-            openVR.RenderScale = value;
+            upscaler.RenderScale = value;
         }
 
         private void tbrSharpness_Scroll(object sender, EventArgs e)
         {
             int value = tbrSharpness.Value;
             lblSharpnessValue.Text = ((double)value / 100).ToString();
-            openVR.Sharpness = value;
+            upscaler.Sharpness = value;
         }
 
         private void btnApplyUpscaling_Click(object sender, EventArgs e)
         {
-            openVR.Save();
+            upscaler.Apply();
         }
 
-        private void btnGetSteamVR_Click(object sender, EventArgs e)
+        private void btnEnableUpscaling_Click(object sender, EventArgs e)
         {
-            Link.Open("https://github.com/ItsKaitlyn03/OculusKiller/releases/latest");
+            upscaler.Enable();
         }
 
-        private void btnGetUpscaling_Click(object sender, EventArgs e)
+        private void btnDisableUpscaling_Click(object sender, EventArgs e)
         {
-            Link.Open("https://github.com/fholger/openvr_fsr/releases/latest");
+            upscaler.Disable();
+        }
+
+        private void btnBackupService_Click(object sender, EventArgs e)
+        {
+            noOculus.Backup();
+        }
+
+        private void btnServiceSteam_Click(object sender, EventArgs e)
+        {
+            noOculus.Enable();
+            UpdateServiceLabel();
+        }
+
+        private void btnServiceOculus_Click(object sender, EventArgs e)
+        {
+            noOculus.Disable();
+            UpdateServiceLabel();
+        }
+
+        private void btnUpscalerBackup_Click(object sender, EventArgs e)
+        {
+            upscaler.Backup();
         }
     }
 }

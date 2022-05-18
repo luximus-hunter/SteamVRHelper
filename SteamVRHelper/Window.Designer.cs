@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Window));
-            this.rbtnSteamVR = new System.Windows.Forms.RadioButton();
-            this.rbtnOculus = new System.Windows.Forms.RadioButton();
             this.btnExit = new System.Windows.Forms.Button();
             this.gbxService = new System.Windows.Forms.GroupBox();
-            this.btnGetSteamVR = new System.Windows.Forms.Button();
+            this.lblActiveService = new System.Windows.Forms.Label();
+            this.btnServiceSteam = new System.Windows.Forms.Button();
+            this.btnServiceOculus = new System.Windows.Forms.Button();
+            this.btnBackupService = new System.Windows.Forms.Button();
             this.gbxExit = new System.Windows.Forms.GroupBox();
-            this.gbxEnableUpscaling = new System.Windows.Forms.GroupBox();
-            this.btnGetUpscaling = new System.Windows.Forms.Button();
-            this.chbxEnableUpscaling = new System.Windows.Forms.CheckBox();
             this.gbxUpscaling = new System.Windows.Forms.GroupBox();
+            this.btnEnableUpscaling = new System.Windows.Forms.Button();
+            this.btnDisableUpscaling = new System.Windows.Forms.Button();
             this.lblScaledGames = new System.Windows.Forms.Label();
             this.lbxUpscaledGames = new System.Windows.Forms.ListBox();
             this.lblSharpnessValue = new System.Windows.Forms.Label();
@@ -50,43 +50,19 @@
             this.lblRenderScale = new System.Windows.Forms.Label();
             this.rbtnNIS = new System.Windows.Forms.RadioButton();
             this.rbtnFSR = new System.Windows.Forms.RadioButton();
+            this.btnUpscalerBackup = new System.Windows.Forms.Button();
             this.gbxService.SuspendLayout();
             this.gbxExit.SuspendLayout();
-            this.gbxEnableUpscaling.SuspendLayout();
             this.gbxUpscaling.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbrSharpness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbrRenderScale)).BeginInit();
             this.SuspendLayout();
             // 
-            // rbtnSteamVR
-            // 
-            this.rbtnSteamVR.AutoSize = true;
-            this.rbtnSteamVR.Location = new System.Drawing.Point(6, 22);
-            this.rbtnSteamVR.Name = "rbtnSteamVR";
-            this.rbtnSteamVR.Size = new System.Drawing.Size(71, 20);
-            this.rbtnSteamVR.TabIndex = 2;
-            this.rbtnSteamVR.TabStop = true;
-            this.rbtnSteamVR.Text = "SteamVR";
-            this.rbtnSteamVR.UseVisualStyleBackColor = true;
-            this.rbtnSteamVR.CheckedChanged += new System.EventHandler(this.rbtnService_Changed);
-            // 
-            // rbtnOculus
-            // 
-            this.rbtnOculus.AutoSize = true;
-            this.rbtnOculus.Location = new System.Drawing.Point(6, 48);
-            this.rbtnOculus.Name = "rbtnOculus";
-            this.rbtnOculus.Size = new System.Drawing.Size(62, 20);
-            this.rbtnOculus.TabIndex = 3;
-            this.rbtnOculus.TabStop = true;
-            this.rbtnOculus.Text = "Oculus";
-            this.rbtnOculus.UseVisualStyleBackColor = true;
-            this.rbtnOculus.CheckedChanged += new System.EventHandler(this.rbtnService_Changed);
-            // 
             // btnExit
             // 
             this.btnExit.Location = new System.Drawing.Point(6, 22);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(188, 82);
+            this.btnExit.Size = new System.Drawing.Size(188, 74);
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -94,70 +70,71 @@
             // 
             // gbxService
             // 
-            this.gbxService.Controls.Add(this.btnGetSteamVR);
-            this.gbxService.Controls.Add(this.rbtnSteamVR);
-            this.gbxService.Controls.Add(this.rbtnOculus);
+            this.gbxService.Controls.Add(this.lblActiveService);
+            this.gbxService.Controls.Add(this.btnServiceSteam);
+            this.gbxService.Controls.Add(this.btnServiceOculus);
+            this.gbxService.Controls.Add(this.btnBackupService);
             this.gbxService.Location = new System.Drawing.Point(12, 12);
             this.gbxService.Name = "gbxService";
-            this.gbxService.Size = new System.Drawing.Size(200, 77);
+            this.gbxService.Size = new System.Drawing.Size(200, 144);
             this.gbxService.TabIndex = 5;
             this.gbxService.TabStop = false;
             this.gbxService.Text = "VR Service";
             // 
-            // btnGetSteamVR
+            // lblActiveService
             // 
-            this.btnGetSteamVR.Location = new System.Drawing.Point(119, 21);
-            this.btnGetSteamVR.Name = "btnGetSteamVR";
-            this.btnGetSteamVR.Size = new System.Drawing.Size(75, 23);
-            this.btnGetSteamVR.TabIndex = 4;
-            this.btnGetSteamVR.Text = "Get";
-            this.btnGetSteamVR.UseVisualStyleBackColor = true;
-            this.btnGetSteamVR.Click += new System.EventHandler(this.btnGetSteamVR_Click);
+            this.lblActiveService.AutoSize = true;
+            this.lblActiveService.Location = new System.Drawing.Point(6, 25);
+            this.lblActiveService.Name = "lblActiveService";
+            this.lblActiveService.Size = new System.Drawing.Size(43, 16);
+            this.lblActiveService.TabIndex = 18;
+            this.lblActiveService.Text = "[value]";
+            // 
+            // btnServiceSteam
+            // 
+            this.btnServiceSteam.Location = new System.Drawing.Point(6, 47);
+            this.btnServiceSteam.Name = "btnServiceSteam";
+            this.btnServiceSteam.Size = new System.Drawing.Size(188, 23);
+            this.btnServiceSteam.TabIndex = 17;
+            this.btnServiceSteam.Text = "Enable Steam";
+            this.btnServiceSteam.UseVisualStyleBackColor = true;
+            this.btnServiceSteam.Click += new System.EventHandler(this.btnServiceSteam_Click);
+            // 
+            // btnServiceOculus
+            // 
+            this.btnServiceOculus.Location = new System.Drawing.Point(6, 76);
+            this.btnServiceOculus.Name = "btnServiceOculus";
+            this.btnServiceOculus.Size = new System.Drawing.Size(188, 23);
+            this.btnServiceOculus.TabIndex = 16;
+            this.btnServiceOculus.Text = "Enable Oculus";
+            this.btnServiceOculus.UseVisualStyleBackColor = true;
+            this.btnServiceOculus.Click += new System.EventHandler(this.btnServiceOculus_Click);
+            // 
+            // btnBackupService
+            // 
+            this.btnBackupService.Location = new System.Drawing.Point(6, 105);
+            this.btnBackupService.Name = "btnBackupService";
+            this.btnBackupService.Size = new System.Drawing.Size(188, 23);
+            this.btnBackupService.TabIndex = 15;
+            this.btnBackupService.Text = "Backup";
+            this.btnBackupService.UseVisualStyleBackColor = true;
+            this.btnBackupService.Click += new System.EventHandler(this.btnBackupService_Click);
             // 
             // gbxExit
             // 
             this.gbxExit.Controls.Add(this.btnExit);
-            this.gbxExit.Location = new System.Drawing.Point(12, 151);
+            this.gbxExit.Location = new System.Drawing.Point(12, 162);
             this.gbxExit.Name = "gbxExit";
-            this.gbxExit.Size = new System.Drawing.Size(200, 113);
+            this.gbxExit.Size = new System.Drawing.Size(200, 102);
             this.gbxExit.TabIndex = 6;
             this.gbxExit.TabStop = false;
             this.gbxExit.Text = "Exit VR";
             // 
-            // gbxEnableUpscaling
-            // 
-            this.gbxEnableUpscaling.Controls.Add(this.btnGetUpscaling);
-            this.gbxEnableUpscaling.Controls.Add(this.chbxEnableUpscaling);
-            this.gbxEnableUpscaling.Location = new System.Drawing.Point(12, 95);
-            this.gbxEnableUpscaling.Name = "gbxEnableUpscaling";
-            this.gbxEnableUpscaling.Size = new System.Drawing.Size(200, 50);
-            this.gbxEnableUpscaling.TabIndex = 7;
-            this.gbxEnableUpscaling.TabStop = false;
-            this.gbxEnableUpscaling.Text = "Upscaling";
-            // 
-            // btnGetUpscaling
-            // 
-            this.btnGetUpscaling.Location = new System.Drawing.Point(119, 19);
-            this.btnGetUpscaling.Name = "btnGetUpscaling";
-            this.btnGetUpscaling.Size = new System.Drawing.Size(75, 23);
-            this.btnGetUpscaling.TabIndex = 5;
-            this.btnGetUpscaling.Text = "Get";
-            this.btnGetUpscaling.UseVisualStyleBackColor = true;
-            this.btnGetUpscaling.Click += new System.EventHandler(this.btnGetUpscaling_Click);
-            // 
-            // chbxEnableUpscaling
-            // 
-            this.chbxEnableUpscaling.AutoSize = true;
-            this.chbxEnableUpscaling.Location = new System.Drawing.Point(6, 23);
-            this.chbxEnableUpscaling.Name = "chbxEnableUpscaling";
-            this.chbxEnableUpscaling.Size = new System.Drawing.Size(68, 20);
-            this.chbxEnableUpscaling.TabIndex = 0;
-            this.chbxEnableUpscaling.Text = "Enabled";
-            this.chbxEnableUpscaling.UseVisualStyleBackColor = true;
-            this.chbxEnableUpscaling.CheckedChanged += new System.EventHandler(this.chbxEnableUpscaling_CheckedChanged);
-            // 
             // gbxUpscaling
             // 
+            this.gbxUpscaling.Controls.Add(this.btnUpscalerBackup);
+            this.gbxUpscaling.Controls.Add(this.btnEnableUpscaling);
+            this.gbxUpscaling.Controls.Add(this.btnDisableUpscaling);
             this.gbxUpscaling.Controls.Add(this.lblScaledGames);
             this.gbxUpscaling.Controls.Add(this.lbxUpscaledGames);
             this.gbxUpscaling.Controls.Add(this.lblSharpnessValue);
@@ -176,6 +153,26 @@
             this.gbxUpscaling.TabStop = false;
             this.gbxUpscaling.Text = "Upscaling Settings";
             // 
+            // btnEnableUpscaling
+            // 
+            this.btnEnableUpscaling.Location = new System.Drawing.Point(200, 220);
+            this.btnEnableUpscaling.Name = "btnEnableUpscaling";
+            this.btnEnableUpscaling.Size = new System.Drawing.Size(97, 23);
+            this.btnEnableUpscaling.TabIndex = 14;
+            this.btnEnableUpscaling.Text = "Enable";
+            this.btnEnableUpscaling.UseVisualStyleBackColor = true;
+            this.btnEnableUpscaling.Click += new System.EventHandler(this.btnEnableUpscaling_Click);
+            // 
+            // btnDisableUpscaling
+            // 
+            this.btnDisableUpscaling.Location = new System.Drawing.Point(303, 220);
+            this.btnDisableUpscaling.Name = "btnDisableUpscaling";
+            this.btnDisableUpscaling.Size = new System.Drawing.Size(92, 23);
+            this.btnDisableUpscaling.TabIndex = 13;
+            this.btnDisableUpscaling.Text = "Disable";
+            this.btnDisableUpscaling.UseVisualStyleBackColor = true;
+            this.btnDisableUpscaling.Click += new System.EventHandler(this.btnDisableUpscaling_Click);
+            // 
             // lblScaledGames
             // 
             this.lblScaledGames.AutoSize = true;
@@ -191,7 +188,7 @@
             this.lbxUpscaledGames.ItemHeight = 16;
             this.lbxUpscaledGames.Location = new System.Drawing.Point(200, 47);
             this.lbxUpscaledGames.Name = "lbxUpscaledGames";
-            this.lbxUpscaledGames.Size = new System.Drawing.Size(195, 196);
+            this.lbxUpscaledGames.Size = new System.Drawing.Size(195, 164);
             this.lbxUpscaledGames.TabIndex = 10;
             // 
             // lblSharpnessValue
@@ -218,9 +215,9 @@
             // 
             // btnApplyUpscaling
             // 
-            this.btnApplyUpscaling.Location = new System.Drawing.Point(6, 220);
+            this.btnApplyUpscaling.Location = new System.Drawing.Point(105, 220);
             this.btnApplyUpscaling.Name = "btnApplyUpscaling";
-            this.btnApplyUpscaling.Size = new System.Drawing.Size(188, 23);
+            this.btnApplyUpscaling.Size = new System.Drawing.Size(89, 23);
             this.btnApplyUpscaling.TabIndex = 7;
             this.btnApplyUpscaling.Text = "Apply";
             this.btnApplyUpscaling.UseVisualStyleBackColor = true;
@@ -292,13 +289,22 @@
             this.rbtnFSR.UseVisualStyleBackColor = true;
             this.rbtnFSR.CheckedChanged += new System.EventHandler(this.rbtnOpenVR_Changed);
             // 
+            // btnUpscalerBackup
+            // 
+            this.btnUpscalerBackup.Location = new System.Drawing.Point(10, 220);
+            this.btnUpscalerBackup.Name = "btnUpscalerBackup";
+            this.btnUpscalerBackup.Size = new System.Drawing.Size(89, 23);
+            this.btnUpscalerBackup.TabIndex = 15;
+            this.btnUpscalerBackup.Text = "Backup";
+            this.btnUpscalerBackup.UseVisualStyleBackColor = true;
+            this.btnUpscalerBackup.Click += new System.EventHandler(this.btnUpscalerBackup_Click);
+            // 
             // Window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 275);
             this.Controls.Add(this.gbxUpscaling);
-            this.Controls.Add(this.gbxEnableUpscaling);
             this.Controls.Add(this.gbxExit);
             this.Controls.Add(this.gbxService);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -311,8 +317,6 @@
             this.gbxService.ResumeLayout(false);
             this.gbxService.PerformLayout();
             this.gbxExit.ResumeLayout(false);
-            this.gbxEnableUpscaling.ResumeLayout(false);
-            this.gbxEnableUpscaling.PerformLayout();
             this.gbxUpscaling.ResumeLayout(false);
             this.gbxUpscaling.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbrSharpness)).EndInit();
@@ -322,15 +326,9 @@
         }
 
         #endregion
-
-        private RadioButton rbtnSteamVR;
-        private RadioButton rbtnOculus;
         private Button btnExit;
         private GroupBox gbxService;
         private GroupBox gbxExit;
-        private Button btnGetSteamVR;
-        private GroupBox gbxEnableUpscaling;
-        private CheckBox chbxEnableUpscaling;
         private GroupBox gbxUpscaling;
         private RadioButton rbtnNIS;
         private RadioButton rbtnFSR;
@@ -341,10 +339,16 @@
         private Button btnApplyUpscaling;
         private Label lblSharpnessValue;
         private Label lblRenderScaleValue;
-        private Button btnGetUpscaling;
         private Label lblUpscaledGames;
         private CheckedListBox chlbxUpscaledGames;
         private Label lblScaledGames;
         private ListBox lbxUpscaledGames;
+        private Button btnEnableUpscaling;
+        private Button btnDisableUpscaling;
+        private Button btnBackupService;
+        private Button btnServiceSteam;
+        private Button btnServiceOculus;
+        private Label lblActiveService;
+        private Button btnUpscalerBackup;
     }
 }
