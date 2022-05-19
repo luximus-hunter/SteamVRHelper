@@ -18,9 +18,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Exit.xaml" />
+    <None Remove="Views\NoOculus.xaml" />
     <None Remove="Views\Settings.xaml" />
     <None Remove="Views\Upscaling.xaml" />
-    <None Remove="Views\VrService.xaml" />
     <None Remove="VrService.xaml" />
   </ItemGroup>
 
@@ -47,6 +47,19 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Language\EN.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EN.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Language\EN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Views\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -62,7 +75,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\VrService.xaml">
+    <Page Update="Views\NoOculus.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

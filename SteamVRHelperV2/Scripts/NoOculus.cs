@@ -1,12 +1,19 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace SteamVRHelper
+namespace SteamVRHelperV2.Scripts
 {
     internal enum VRService
     {
         Steam = 0,
         Oculus = 1
+    }
+
+    internal enum NoOculusToggleArg
+    {
+        Backup = 0,
+        Enable = 1,
+        Disable = 2
     }
 
     internal class NoOculus
@@ -42,24 +49,18 @@ namespace SteamVRHelper
 
         public void Backup()
         {
-            string activeFile = Locations.OculusFile;
-            string backupFile = Locations.OculusFile + Locations.BackupExtension;
-
-            if (!File.Exists(backupFile))
-            {
-                File.Copy(activeFile, backupFile, true);
-            }
+            Execute(NoOculusToggleArg.Backup);
         }
 
         public void Enable()
         {
-            File.Copy(Locations.OculusKillerFile, Locations.OculusFile, true);
+            Execute(NoOculusToggleArg.Enable);
             activeService = VRService.Steam;
         }
 
         public void Disable()
         {
-            File.Copy(Locations.OculusBackupFile, Locations.OculusFile, true);
+            Execute(NoOculusToggleArg.Disable);
             activeService = VRService.Oculus;
         }
 
@@ -68,6 +69,37 @@ namespace SteamVRHelper
             KillProgram("OculusClient");
             KillProgram("vrmonitor");
         }
+
+        public void Execute(NoOculusToggleArg arg)
+        {
+            if (!File.Exists(Locations.NoOculusToggle))
+            {
+                return;
+            }
+
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.FileName = Locations.NoOculusToggle;
+
+            switch (arg)
+            {
+                case NoOculusToggleArg.Backup:
+                    startInfo.Arguments = "-b";
+                    break;
+                case NoOculusToggleArg.Enable:
+                    startInfo.Arguments = "-e";
+                    break;
+                case NoOculusToggleArg.Disable:
+                    startInfo.Arguments = "-d";
+                    break;
+                default:
+                    break;
+            }
+
+            process.StartInfo = startInfo;
+            process.Start();
+        } 
 
         #region Getters and Setters
 

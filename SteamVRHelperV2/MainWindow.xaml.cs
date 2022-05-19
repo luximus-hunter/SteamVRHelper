@@ -54,7 +54,7 @@ namespace SteamVRHelperV2
                     switch (itemContent.Tag)
                     {
                         case "navVrService":
-                            contentFrame.Navigate(typeof(VrService));
+                            contentFrame.Navigate(typeof(NoOculus));
                             menuContainer.Header = itemContent.Text;
                             break;
                         case "navUpscaling":

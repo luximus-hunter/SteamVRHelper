@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace SteamVRHelper
+namespace SteamVRHelperV2.Scripts
 {
     internal class Library
     {

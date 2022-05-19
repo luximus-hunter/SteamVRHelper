@@ -93,13 +93,7 @@
                 BorderThickness="1"
                 Padding="16"
                 Header="Games to scale up">
-            <muxc:Expander.Content>
-                <Grid>
-                    <CheckBox VerticalAlignment="Center" 
-                              HorizontalAlignment="Left">
-                        VRChat
-                    </CheckBox>
-                </Grid>
+            <muxc:Expander.Content> 5
             </muxc:Expander.Content>
         </muxc:Expander>
     </StackPanel>

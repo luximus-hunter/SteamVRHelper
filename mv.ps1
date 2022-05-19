@@ -1,0 +1,1 @@
+Copy-Item -Path ".\NoOculusToggle\bin\Debug\net6.0\*" -Destination ".\SteamVRHelperV2\bin\x64\Debug\net6.0-windows10.0.19041.0" -Recurse
