@@ -1,6 +1,4 @@
-﻿using Microsoft.Win32;
-
-namespace NoOculusToggle
+﻿namespace NoOculusToggle
 {
     internal static class Locations
     {
@@ -8,13 +6,6 @@ namespace NoOculusToggle
         public static string TemplateDirectory = Path.Combine(Root, "TemplateFiles");
 
         public static string BackupExtension = ".backup";
-
-        #region Steam
-
-        public static string Steam = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", null).ToString();
-        public static string SteamGames = Path.Combine(Path.GetFullPath(Steam), @"steamapps\common\");
-
-        #endregion
 
         #region Oculus
 
@@ -25,23 +16,5 @@ namespace NoOculusToggle
         public static string OculusBackupFile = Path.Combine(OculusDirectory, OculusFileName + BackupExtension);
 
         #endregion
-
-        #region OpenVR
-
-        public static string OpenvrDllFileName = "openvr_api.dll";
-        public static string OpenvrConfigFileName = "openvr_mod.cfg";
-        public static string OpenvrLogFileName = "openvr_mod.log";
-        public static string OpenvrDllFile = Path.Combine(TemplateDirectory, OpenvrDllFileName);
-        public static string OpenvrConfigFile = Path.Combine(TemplateDirectory, OpenvrConfigFileName);
-
-        #endregion
-
-        public static void CreateDirectory(string path)
-        {
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-        }
     }
 }
