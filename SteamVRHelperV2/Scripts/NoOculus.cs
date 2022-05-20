@@ -22,7 +22,12 @@ namespace SteamVRHelperV2.Scripts
 
         public NoOculus()
         {
-            Backup();
+            string backupFile = Locations.OculusFile + Locations.BackupExtension;
+
+            if (!File.Exists(backupFile)) 
+            {
+                Backup();
+            }
 
             if (DetectOculus() && DetectKiller())
             {
@@ -37,12 +42,12 @@ namespace SteamVRHelperV2.Scripts
             }
         }
 
-        public bool DetectOculus()
+        public static bool DetectOculus()
         {
             return File.Exists(Locations.OculusFile);
         }
 
-        public bool DetectKiller()
+        public static bool DetectKiller()
         {
             return File.Exists(Locations.OculusKillerFile);
         }
@@ -80,7 +85,10 @@ namespace SteamVRHelperV2.Scripts
             Process process = new Process();
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.UseShellExecute = true;
+            startInfo.WorkingDirectory = @".";
             startInfo.FileName = Locations.NoOculusToggle;
+            startInfo.Verb = "runas";
 
             switch (arg)
             {
@@ -92,8 +100,6 @@ namespace SteamVRHelperV2.Scripts
                     break;
                 case NoOculusToggleArg.Disable:
                     startInfo.Arguments = "-d";
-                    break;
-                default:
                     break;
             }
 

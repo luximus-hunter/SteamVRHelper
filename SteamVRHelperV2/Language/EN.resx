@@ -123,6 +123,9 @@
   <data name="Exit.ExitVR" xml:space="preserve">
     <value>Exit VR</value>
   </data>
+  <data name="Exit.Title" xml:space="preserve">
+    <value>Exit VR</value>
+  </data>
   <data name="NoOculus.Description" xml:space="preserve">
     <value>Replace Oculus Dash with SteamVR.</value>
   </data>
@@ -132,10 +135,16 @@
   <data name="NoOculus.NotDetected" xml:space="preserve">
     <value>This section is only availibe for Oculus users. It enables the option to skip the Oculus Dash when starting the link between PC and an Oculus headset.</value>
   </data>
+  <data name="NoOculus.NotDetectedTitle" xml:space="preserve">
+    <value>Oculus not detected</value>
+  </data>
   <data name="NoOculus.Oculus" xml:space="preserve">
     <value>Oculus Dash</value>
   </data>
-  <data name="NoOculus.SteamVR" xml:space="preserve">
+  <data name="NoOculus.Service" xml:space="preserve">
+    <value>VR Service</value>
+  </data>
+  <data name="NoOculus.Steam" xml:space="preserve">
     <value>SteamVR</value>
   </data>
   <data name="NoOculus.Title" xml:space="preserve">

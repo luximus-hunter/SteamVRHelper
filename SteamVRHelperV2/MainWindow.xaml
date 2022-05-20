@@ -18,23 +18,19 @@
                     Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}">
         <NavigationView.MenuItems>
             <NavigationViewItem Icon="FullScreen"
-                                x:Name="menuItemUpscaling"
                                 Tag="menuItemUpscaling" >
-                <TextBlock Tag="navUpscaling">Upscaling</TextBlock>
+                <TextBlock Tag="navUpscaling" x:Name="NavUpscaling"/>
             </NavigationViewItem>
-            <NavigationViewItem
-                                x:Name="menuItemVrService"
-                                Tag="menuItemVrService" >
+            <NavigationViewItem Tag="menuItemVrService" >
                 <NavigationViewItem.Icon>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" 
                               Glyph="&#xE7FC;"/>
                 </NavigationViewItem.Icon>
-                <TextBlock Tag="navVrService">VR Service</TextBlock>
+                <TextBlock Tag="navNoOculus" x:Name="NavNoOculus"/>
             </NavigationViewItem>
             <NavigationViewItem Icon="Clear"
-                                x:Name="menuItemExitVr" 
                                 Tag="menuItemExitVr" >
-                <TextBlock Tag="navExit">Exit VR</TextBlock>
+                <TextBlock Tag="navExit" x:Name="NavExit"/>
             </NavigationViewItem>
         </NavigationView.MenuItems>
 

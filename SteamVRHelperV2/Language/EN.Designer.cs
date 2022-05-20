@@ -79,6 +79,15 @@ namespace SteamVRHelperV2.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit VR.
+        /// </summary>
+        internal static string Exit_Title {
+            get {
+                return ResourceManager.GetString("Exit.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replace Oculus Dash with SteamVR..
         /// </summary>
         internal static string NoOculus_Description {
@@ -106,6 +115,15 @@ namespace SteamVRHelperV2.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Oculus not detected.
+        /// </summary>
+        internal static string NoOculus_NotDetectedTitle {
+            get {
+                return ResourceManager.GetString("NoOculus.NotDetectedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oculus Dash.
         /// </summary>
         internal static string NoOculus_Oculus {
@@ -115,11 +133,20 @@ namespace SteamVRHelperV2.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VR Service.
+        /// </summary>
+        internal static string NoOculus_Service {
+            get {
+                return ResourceManager.GetString("NoOculus.Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SteamVR.
         /// </summary>
-        internal static string NoOculus_SteamVR {
+        internal static string NoOculus_Steam {
             get {
-                return ResourceManager.GetString("NoOculus.SteamVR", resourceCulture);
+                return ResourceManager.GetString("NoOculus.Steam", resourceCulture);
             }
         }
         

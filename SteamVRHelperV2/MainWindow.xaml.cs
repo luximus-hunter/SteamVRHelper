@@ -12,6 +12,8 @@ namespace SteamVRHelperV2
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        private Scripts.Language _l = new();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +33,11 @@ namespace SteamVRHelperV2
             }
 
             contentFrame.Navigate(typeof(Upscaling));
-            menuContainer.Header = "Upscaling";
+            menuContainer.Header = _l.GetRawString("Upscaling.Title");
+
+            NavUpscaling.Text = _l.GetRawString("Upscaling.Title");
+            NavNoOculus.Text = _l.GetRawString("NoOculus.Title");
+            NavExit.Text = _l.GetRawString("Exit.Title");
         }
 
         private void MenuContainerSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -53,12 +59,12 @@ namespace SteamVRHelperV2
                 {
                     switch (itemContent.Tag)
                     {
-                        case "navVrService":
-                            contentFrame.Navigate(typeof(NoOculus));
-                            menuContainer.Header = itemContent.Text;
-                            break;
                         case "navUpscaling":
                             contentFrame.Navigate(typeof(Upscaling));
+                            menuContainer.Header = itemContent.Text;
+                            break;
+                        case "navNoOculus":
+                            contentFrame.Navigate(typeof(NoOculus));
                             menuContainer.Header = itemContent.Text;
                             break;
                         case "navExit":

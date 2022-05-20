@@ -11,15 +11,14 @@
         <muxc:InfoBar Width="600"
                       IsOpen="True"
                       Severity="Error"
-                      Title="Oculus not detected"
                       IsClosable="False"
-                      Message="This section is only availibe for Oculus users. It enables the option to skip the Oculus Dash when starting the link between PC and an Oculus headset."
                       VerticalAlignment="Top" 
                       HorizontalAlignment="Left" 
                       Margin="16"
                       CornerRadius="8"
                       BorderThickness="1"
-                      Padding="16" />
+                      Padding="16"
+                      x:Name="MsgNoOculusBar" />
         <Border Width="600" 
                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                 VerticalAlignment="Top" 
@@ -41,37 +40,27 @@
                 <TextBlock Grid.Row="0" 
                            Grid.Column="0"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">VR Service</TextBlock>
-                <ComboBox ItemsSource="" 
-                          DisplayMemberPath="Item1" 
-                          SelectedValuePath="Item2"
+                           HorizontalAlignment="Left"
+                           x:Name="LblService"/>
+                <ComboBox ItemsSource="{x:Bind Services}"
                           Width="200"
                           Grid.Row="0"
                           Grid.Column="1"
                           VerticalAlignment="Center" 
-                          HorizontalAlignment="Right"/>
+                          HorizontalAlignment="Right"
+                          x:Name="CbxServices"
+                          SelectionChanged="CbxServicesChanged"
+                          Loaded="CbxServicesLoaded"/>
                 <Button Grid.Row="1"
                         Grid.Column="1"
                         Width="200"
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"
-                        Style="{StaticResource AccentButtonStyle}">
-                    Apply
-                </Button>
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnApply"
+                        Click="BtnApplyClick"/>
             </Grid>
         </Border>
-        <muxc:InfoBar Width="600"
-                      IsOpen="True"
-                      Severity="Warning"
-                      Title="Experimental"
-                      IsClosable="False"
-                      Message="The following feature(s) are experimental."
-                      VerticalAlignment="Top" 
-                      HorizontalAlignment="Left" 
-                      Margin="16"
-                      CornerRadius="8"
-                      BorderThickness="1"
-                      Padding="16" />
         <Border Width="600" 
                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                 VerticalAlignment="Top" 
@@ -89,9 +78,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <CheckBox>
-                    Fix SteamVR not exiting
-                </CheckBox>
+                <CheckBox x:Name="ChbxFixExit"
+                          IsEnabled="False"
+                          Checked="ChbxFixExitChecked"
+                          Unchecked="ChbxFixExitUnchecked"/>
             </Grid>
         </Border>
     </StackPanel>
