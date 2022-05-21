@@ -11,9 +11,6 @@ namespace SteamVRHelperV2.Scripts
         NIS = 1
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     internal class Upscaler
     {
         private bool inited;
@@ -24,7 +21,7 @@ namespace SteamVRHelperV2.Scripts
         private int sharpness;
         private List<string> config;
 
-        private Library library;
+        private Library _l = new();
 
         public Upscaler()
         {
@@ -38,8 +35,6 @@ namespace SteamVRHelperV2.Scripts
 
             if (inited)
             {
-                library = new Library();
-
                 config = File.ReadAllLines(Locations.OpenvrConfigFile).ToList();
 
                 #region Read Config
@@ -65,7 +60,7 @@ namespace SteamVRHelperV2.Scripts
         /// </summary>
         public void Backup()
         {
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -101,7 +96,7 @@ namespace SteamVRHelperV2.Scripts
             }
 
             // Add config file to games
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -119,7 +114,7 @@ namespace SteamVRHelperV2.Scripts
         {
             Backup();
 
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -137,7 +132,7 @@ namespace SteamVRHelperV2.Scripts
         /// </summary>
         public void Disable()
         {
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -160,7 +155,7 @@ namespace SteamVRHelperV2.Scripts
         {
             Disable();
 
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {

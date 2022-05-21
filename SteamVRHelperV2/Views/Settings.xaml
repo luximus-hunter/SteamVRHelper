@@ -30,29 +30,25 @@
                 <TextBlock Grid.Row="0" 
                            Grid.Column="0"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">
-                    Version:
-                </TextBlock>
+                           HorizontalAlignment="Left"
+                           x:Name="LblAuthor"/>
                 <TextBlock Grid.Row="0" 
                            Grid.Column="1"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Right"
-                           TextAlignment="Right">
-                    2.0
-                </TextBlock>
+                           TextAlignment="Right"
+                           x:Name="LblAuthorName"/>
                 <TextBlock Grid.Row="1" 
                            Grid.Column="0"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">
-                    Author:
-                </TextBlock>
+                           HorizontalAlignment="Left"
+                           x:Name="LblVersion"/>
                 <TextBlock Grid.Row="1" 
                            Grid.Column="1"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Right"
-                           TextAlignment="Right">
-                    Luximus
-                </TextBlock>
+                           TextAlignment="Right"
+                           x:Name="LblVersionNumber"/>
             </Grid>
         </Border>
         
@@ -75,9 +71,8 @@
                 </Grid.RowDefinitions>
                 <muxc:CheckBox VerticalAlignment="Center" 
                                HorizontalAlignment="Left"
-                               Grid.Row="0">
-                    Disable experimental warning
-                </muxc:CheckBox>
+                               Grid.Row="0"
+                               x:Name="ChbxExperimentalWarning"/>
             </Grid>
         </Border>
         
@@ -100,16 +95,14 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">
-                    Restore all files
-                </TextBlock>
+                           HorizontalAlignment="Left"
+                           x:Name="LblRestore"/>
                 <Button Grid.Column="1"
                         Width="200"
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"
-                        Style="{StaticResource AccentButtonStyle}">
-                    Restore
-                </Button>
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnRestore"/>
             </Grid>
         </Border>
     </StackPanel>

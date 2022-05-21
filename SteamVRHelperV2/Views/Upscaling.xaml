@@ -17,8 +17,10 @@
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
             <Grid>
                 <muxc:CheckBox VerticalAlignment="Center" 
-                               HorizontalAlignment="Left">
-                    Enable Upscaling
+                               HorizontalAlignment="Left"
+                               x:Name="ChbxEnableUpscaling"
+                               Checked="ChbxEnableUpscalingChecked"
+                               Unchecked="ChbxEnableUpscalingUnchecked">
                 </muxc:CheckBox>
             </Grid>
         </Border>
@@ -44,45 +46,50 @@
                 <TextBlock Grid.Row="0" 
                            Grid.Column="0"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">Upscaler</TextBlock>
-                <ComboBox ItemsSource="" 
-                          DisplayMemberPath="Item1" 
-                          SelectedValuePath="Item2"
+                           HorizontalAlignment="Left"
+                           x:Name="LblAlgirithm"/>
+                <ComboBox ItemsSource="{x:Bind Algorithms}"
                           Width="200"
                           Grid.Row="0"
                           Grid.Column="1"
                           VerticalAlignment="Center" 
-                          HorizontalAlignment="Right"/>
+                          HorizontalAlignment="Right"
+                          x:Name="CbxAlgorithm"
+                          Loaded="CbxAlgorithmLoaded"/>
                 <TextBlock Grid.Row="1" 
                            Grid.Column="0"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">Render Scale</TextBlock>
-                <Slider AutomationProperties.Name="simple slider" 
-                        Width="200" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblScale"/>
+                <Slider Width="200" 
                         Value="77"
                         Grid.Row="1"
                         Grid.Column="1"
                         VerticalAlignment="Center" 
-                        HorizontalAlignment="Right"/>
+                        HorizontalAlignment="Right"
+                        x:Name="SldScale"
+                        ValueChanged="SldScaleChanged"/>
                 <TextBlock Grid.Row="2" 
                            Grid.Column="0"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">Sharpness</TextBlock>
-                <Slider AutomationProperties.Name="simple slider" 
-                        Width="200" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblSharpness"/>
+                <Slider Width="200" 
                         Value="90"
                         Grid.Row="2"
                         Grid.Column="1"
                         VerticalAlignment="Center" 
-                        HorizontalAlignment="Right"/>
+                        HorizontalAlignment="Right"
+                        x:Name="SldSharpness"
+                        ValueChanged="SldSharpnessChanged"/>
                 <Button Grid.Row="3"
                         Grid.Column="1"
                         Width="200"
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"
-                        Style="{StaticResource AccentButtonStyle}">
-                    Apply
-                </Button>
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnApply"
+                        Click="BtnApplyClick"/>
             </Grid>
         </Border>
         <muxc:Expander Width="600"
@@ -92,8 +99,8 @@
                 CornerRadius="8"
                 BorderThickness="1"
                 Padding="16"
-                Header="Games to scale up">
-            <muxc:Expander.Content> 5
+                x:Name="ExpScaledGames">
+            <muxc:Expander.Content>
             </muxc:Expander.Content>
         </muxc:Expander>
     </StackPanel>

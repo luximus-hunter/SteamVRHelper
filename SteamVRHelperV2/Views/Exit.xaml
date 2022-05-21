@@ -27,15 +27,16 @@
                 <TextBlock Grid.Row="0" 
                            Grid.Column="0"
                            VerticalAlignment="Center" 
-                           HorizontalAlignment="Left">Exit VR</TextBlock>
+                           HorizontalAlignment="Left"
+                           x:Name="LblExitVR"/>
                 <Button Grid.Row="0"
                         Grid.Column="1"
                         Width="200"
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"
-                        Style="{StaticResource AccentButtonStyle}">
-                    Exit
-                </Button>
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnExitVR"
+                        Click="BtnExitVRClick"/>
             </Grid>
         </Border>
     </StackPanel>

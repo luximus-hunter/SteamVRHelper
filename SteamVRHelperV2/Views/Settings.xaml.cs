@@ -10,9 +10,22 @@ namespace SteamVRHelperV2.Views
     /// </summary>
     public sealed partial class Settings : Page
     {
+        private Scripts.Language _l = new("Settings");
+
         public Settings()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+
+            LblAuthor.Text = _l.GetString("Author");
+            LblAuthorName.Text = _l.GetString("AuthorName");
+            LblVersion.Text = _l.GetString("Version");
+            LblVersionNumber.Text = _l.GetString("VersionNumber");
+            ChbxExperimentalWarning.Content = _l.GetString("DisableExperimentalWarning");
+            LblRestore.Text = _l.GetString("RestoreFiles");
+            BtnRestore.Content = _l.GetString("Restore");
+
+            ChbxExperimentalWarning.IsEnabled = false;
+            BtnRestore.IsEnabled = false;
         }
     }
 }

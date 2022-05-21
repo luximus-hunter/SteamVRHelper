@@ -10,9 +10,19 @@ namespace SteamVRHelperV2.Views
     /// </summary>
     public sealed partial class Exit : Page
     {
+        private Scripts.Language _l = new("Exit");
+
         public Exit()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+
+            LblExitVR.Text = _l.GetString("ExitVR");
+            BtnExitVR.Content = _l.GetString("Button");
+        }
+
+        private void BtnExitVRClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            Scripts.NoOculus.Exit();
         }
     }
 }

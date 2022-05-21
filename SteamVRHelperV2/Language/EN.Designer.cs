@@ -250,6 +250,15 @@ namespace SteamVRHelperV2.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upscaling Algorithm.
+        /// </summary>
+        internal static string Upscaling_Algorithm {
+            get {
+                return ResourceManager.GetString("Upscaling.Algorithm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scale VR games with FSR or NIS..
         /// </summary>
         internal static string Upscaling_Description {
@@ -295,7 +304,7 @@ namespace SteamVRHelperV2.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Games to scale up.
+        ///   Looks up a localized string similar to Games being scaled up.
         /// </summary>
         internal static string Upscaling_ScaledGames {
             get {
@@ -318,15 +327,6 @@ namespace SteamVRHelperV2.Language {
         internal static string Upscaling_Title {
             get {
                 return ResourceManager.GetString("Upscaling.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Upscaler.
-        /// </summary>
-        internal static string Upscaling_Upscaler {
-            get {
-                return ResourceManager.GetString("Upscaling.Upscaler", resourceCulture);
             }
         }
     }

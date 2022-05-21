@@ -18,7 +18,7 @@ namespace SteamVRHelperV2.Scripts
 
     internal class NoOculus
     {
-        private VRService activeService;
+        private VRService _as;
 
         public NoOculus()
         {
@@ -33,11 +33,11 @@ namespace SteamVRHelperV2.Scripts
             {
                 if (File.ReadAllBytes(Locations.OculusFile).Length == File.ReadAllBytes(Locations.OculusKillerFile).Length)
                 {
-                    activeService = VRService.Steam;
+                    _as = VRService.Steam;
                 }
                 else
                 {
-                    activeService = VRService.Oculus;
+                    _as = VRService.Oculus;
                 }
             }
         }
@@ -60,13 +60,13 @@ namespace SteamVRHelperV2.Scripts
         public void Enable()
         {
             Execute(NoOculusToggleArg.Enable);
-            activeService = VRService.Steam;
+            _as = VRService.Steam;
         }
 
         public void Disable()
         {
             Execute(NoOculusToggleArg.Disable);
-            activeService = VRService.Oculus;
+            _as = VRService.Oculus;
         }
 
         public static void Exit()
@@ -111,8 +111,8 @@ namespace SteamVRHelperV2.Scripts
 
         public VRService ActiveService
         {
-            get => activeService;
-            set => activeService = value;
+            get => _as;
+            set => _as = value;
         }
 
         #endregion

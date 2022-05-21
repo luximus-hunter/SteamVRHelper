@@ -19,7 +19,7 @@ namespace SteamVRHelperV2.Views
 
         public NoOculus()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             Services = new()
             {

@@ -180,6 +180,9 @@
   <data name="Settings.VersionNumber" xml:space="preserve">
     <value>2.0</value>
   </data>
+  <data name="Upscaling.Algorithm" xml:space="preserve">
+    <value>Upscaling Algorithm</value>
+  </data>
   <data name="Upscaling.Description" xml:space="preserve">
     <value>Scale VR games with FSR or NIS.</value>
   </data>
@@ -196,15 +199,12 @@
     <value>Render Scale</value>
   </data>
   <data name="Upscaling.ScaledGames" xml:space="preserve">
-    <value>Games to scale up</value>
+    <value>Games being scaled up</value>
   </data>
   <data name="Upscaling.Sharpness" xml:space="preserve">
     <value>Sharpness</value>
   </data>
   <data name="Upscaling.Title" xml:space="preserve">
     <value>Upscaling</value>
-  </data>
-  <data name="Upscaling.Upscaler" xml:space="preserve">
-    <value>Upscaler</value>
   </data>
 </root>
