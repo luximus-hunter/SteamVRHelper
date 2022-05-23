@@ -66,6 +66,11 @@ namespace SteamVRHelperV2.Scripts
             set => _n = value;
         }
 
+        public string DisplayName
+        {
+            get => _n.Replace('_', ' ');
+        }
+
         public List<string> Paths
         {
             get => _p;

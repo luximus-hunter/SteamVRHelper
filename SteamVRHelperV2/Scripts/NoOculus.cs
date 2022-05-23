@@ -24,7 +24,7 @@ namespace SteamVRHelperV2.Scripts
         {
             string backupFile = Locations.OculusFile + Locations.BackupExtension;
 
-            if (!File.Exists(backupFile)) 
+            if (!BackedUp()) 
             {
                 Backup();
             }
@@ -40,6 +40,11 @@ namespace SteamVRHelperV2.Scripts
                     _as = VRService.Oculus;
                 }
             }
+        }
+
+        public static bool BackedUp()
+        {
+            return File.Exists(Locations.OculusBackupFile);
         }
 
         public static bool DetectOculus()

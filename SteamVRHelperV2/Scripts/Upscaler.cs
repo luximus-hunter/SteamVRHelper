@@ -25,7 +25,10 @@ namespace SteamVRHelperV2.Scripts
 
         public Upscaler()
         {
-            Backup();
+            if (!BackedUp())
+            {
+                Backup();
+            }
 
             if (File.Exists(Path.Combine(Locations.OpenvrDllFile)) &&
                File.Exists(Path.Combine(Locations.OpenvrConfigFile)))
@@ -53,6 +56,48 @@ namespace SteamVRHelperV2.Scripts
 
                 #endregion
             }
+        }
+
+        public bool BackedUp()
+        {
+            bool backedUp = true;
+
+            foreach (Game game in _l.Games)
+            {
+                foreach (string path in game.Paths)
+                {
+                    string backupFile = Path.Combine(path, Locations.OpenvrDllFileName + Locations.BackupExtension);
+
+                    if (!File.Exists(backupFile))
+                    {
+                        backedUp = false;
+                    }
+                }
+            }
+
+            return backedUp;
+        }
+
+        public bool Enabled()
+        {
+            bool enabled = true;
+
+            foreach (Game game in _l.Games)
+            {
+                foreach (string path in game.Paths)
+                {
+                    string activeFile = Path.Combine(path, Locations.OpenvrDllFileName);
+
+                    if(File.ReadAllLines(activeFile).Length != File.ReadAllLines(Locations.OpenvrDllFile).Length)
+                    {
+                        enabled = false;
+                    }
+                }
+            }
+
+            this.enabled = enabled;
+
+            return enabled;
         }
 
         /// <summary>
@@ -202,12 +247,6 @@ namespace SteamVRHelperV2.Scripts
         public bool Inited
         {
             get => inited;
-        }
-
-        public bool Enabled
-        {
-            get => enabled;
-            set => enabled = value;
         }
 
         public UpscaleAlgorithm Algorithm
