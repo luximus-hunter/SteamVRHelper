@@ -13,7 +13,8 @@ namespace SteamVRHelperV2.Scripts
     {
         Backup = 0,
         Enable = 1,
-        Disable = 2
+        Disable = 2,
+        Restore = 3
     }
 
     internal class NoOculus
@@ -74,6 +75,11 @@ namespace SteamVRHelperV2.Scripts
             _as = VRService.Oculus;
         }
 
+        public void Restore()
+        {
+            Execute(NoOculusToggleArg.Restore);
+        }
+
         public static void Exit()
         {
             KillProgram("OculusClient");
@@ -106,10 +112,21 @@ namespace SteamVRHelperV2.Scripts
                 case NoOculusToggleArg.Disable:
                     startInfo.Arguments = "-d";
                     break;
+                case NoOculusToggleArg.Restore:
+                    startInfo.Arguments = "-r";
+                    break;
             }
 
             process.StartInfo = startInfo;
-            process.Start();
+
+            try
+            {
+                process.Start();
+            }
+            catch (System.Exception)
+            {
+                // no admin?
+            }
         } 
 
         #region Getters and Setters

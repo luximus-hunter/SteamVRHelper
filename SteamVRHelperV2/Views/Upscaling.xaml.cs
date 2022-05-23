@@ -34,7 +34,6 @@ namespace SteamVRHelperV2.Views
             LblScale.Text = _l.GetString("Scale");
             LblSharpness.Text = _l.GetString("Sharpness");
             BtnApply.Content = _l.GetRawString("Settings.Apply");
-            ExpScaledGames.Header = _l.GetString("ScaledGames");
 
             #endregion
         }

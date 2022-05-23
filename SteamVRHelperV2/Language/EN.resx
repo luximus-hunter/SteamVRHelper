@@ -159,11 +159,11 @@
   <data name="Settings.AuthorName" xml:space="preserve">
     <value>Luximus</value>
   </data>
-  <data name="Settings.DisableExperimentalWarning" xml:space="preserve">
-    <value>Disable experimental warning</value>
+  <data name="Settings.Backup" xml:space="preserve">
+    <value>Backup</value>
   </data>
-  <data name="Settings.ExperimentalWarning" xml:space="preserve">
-    <value>The following feature(s) are experimental.</value>
+  <data name="Settings.BackupFiles" xml:space="preserve">
+    <value>Backup Files</value>
   </data>
   <data name="Settings.Restore" xml:space="preserve">
     <value>Restore</value>

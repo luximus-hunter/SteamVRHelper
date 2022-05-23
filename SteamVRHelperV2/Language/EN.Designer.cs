@@ -187,20 +187,20 @@ namespace SteamVRHelperV2.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable experimental warning.
+        ///   Looks up a localized string similar to Backup.
         /// </summary>
-        internal static string Settings_DisableExperimentalWarning {
+        internal static string Settings_Backup {
             get {
-                return ResourceManager.GetString("Settings.DisableExperimentalWarning", resourceCulture);
+                return ResourceManager.GetString("Settings.Backup", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The following feature(s) are experimental..
+        ///   Looks up a localized string similar to Backup Files.
         /// </summary>
-        internal static string Settings_ExperimentalWarning {
+        internal static string Settings_BackupFiles {
             get {
-                return ResourceManager.GetString("Settings.ExperimentalWarning", resourceCulture);
+                return ResourceManager.GetString("Settings.BackupFiles", resourceCulture);
             }
         }
         

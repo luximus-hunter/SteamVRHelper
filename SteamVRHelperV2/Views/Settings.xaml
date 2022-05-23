@@ -51,31 +51,7 @@
                            x:Name="LblVersionNumber"/>
             </Grid>
         </Border>
-        
-        <!-- Settings -->
-        <Border Width="600" 
-                Background="{ThemeResource LayerFillColorDefaultBrush}"
-                VerticalAlignment="Top" 
-                HorizontalAlignment="Left" 
-                Margin="16"
-                CornerRadius="8"
-                BorderThickness="1"
-                Padding="16"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-            <Grid RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <muxc:CheckBox VerticalAlignment="Center" 
-                               HorizontalAlignment="Left"
-                               Grid.Row="0"
-                               x:Name="ChbxExperimentalWarning"/>
-            </Grid>
-        </Border>
-        
+
         <!-- Revert -->
         <Border Width="600" 
                 Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -93,16 +69,34 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock VerticalAlignment="Center" 
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           VerticalAlignment="Center" 
                            HorizontalAlignment="Left"
-                           x:Name="LblRestore"/>
+                           x:Name="LblBackup"/>
                 <Button Grid.Column="1"
+                        Grid.Row="0"
                         Width="200"
                         VerticalAlignment="Center" 
                         HorizontalAlignment="Right"
                         Style="{StaticResource AccentButtonStyle}"
-                        x:Name="BtnRestore"/>
+                        x:Name="BtnBackup"
+                        Click="BtnBackupClick"/>
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblRestore"/>
+                <Button Grid.Column="1"
+                        Grid.Row="1"
+                        Width="200"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnRestore"
+                        Click="BtnRestoreClick"/>
             </Grid>
         </Border>
     </StackPanel>

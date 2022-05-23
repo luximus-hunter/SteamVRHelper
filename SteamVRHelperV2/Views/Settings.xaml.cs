@@ -20,12 +20,28 @@ namespace SteamVRHelperV2.Views
             LblAuthorName.Text = _l.GetString("AuthorName");
             LblVersion.Text = _l.GetString("Version");
             LblVersionNumber.Text = _l.GetString("VersionNumber");
-            ChbxExperimentalWarning.Content = _l.GetString("DisableExperimentalWarning");
+            LblBackup.Text = _l.GetString("BackupFiles");
+            BtnBackup.Content = _l.GetString("Backup");
             LblRestore.Text = _l.GetString("RestoreFiles");
             BtnRestore.Content = _l.GetString("Restore");
+        }
 
-            ChbxExperimentalWarning.IsEnabled = false;
-            BtnRestore.IsEnabled = false;
+        private void BtnBackupClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            Scripts.Upscaler _u = new();
+            _u.Backup();
+
+            Scripts.NoOculus _no = new();
+            _no.Backup();
+        }
+
+        private void BtnRestoreClick(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            Scripts.Upscaler _u = new();
+            _u.Restore();
+
+            Scripts.NoOculus _no = new();
+            _no.Restore();
         }
     }
 }

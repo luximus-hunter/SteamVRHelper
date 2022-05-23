@@ -25,6 +25,9 @@
                     case "-d":
                         Disable();
                         break;
+                    case "-r":
+                        Restore();
+                        break;
                     default:
                         Console.WriteLine("Argument not supported");
                         break;
@@ -41,6 +44,15 @@
             {
                 File.Copy(activeFile, backupFile, true);
             }
+        }
+
+        public static void Restore()
+        {
+            string activeFile = Locations.OculusFile;
+            string backupFile = Locations.OculusFile + Locations.BackupExtension;
+
+            File.Copy(backupFile, activeFile, true);
+            File.Delete(backupFile);
         }
 
         public static void Enable()
