@@ -1,12 +1,16 @@
-﻿namespace SteamVRHelper
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace SteamVRHelperV2.Scripts
 {
-    internal class Library
+    public class Library
     {
-        private List<Game> games;
+        private List<Game> _g;
 
         public Library()
         {
-            games = new List<Game>();
+            _g = new List<Game>();
 
             List<string> unsortedGames = Directory.GetDirectories(Locations.SteamGames).ToList();
 
@@ -27,7 +31,7 @@
 
                 if (game.Paths.Count > 0)
                 {
-                    games.Add(game);
+                    _g.Add(game);
                 }
             }
         }
@@ -36,36 +40,41 @@
 
         public List<Game> Games
         {
-            get => games;
-            set => games = value;
+            get => _g;
+            set => _g = value;
         }
 
         #endregion
     }
 
-    internal class Game
+    public class Game
     {
-        private string name;
-        private List<string> paths;
+        private string _n;
+        private List<string> _p;
 
         public Game()
         {
-            name = "Untitled Game";
-            paths = new();
+            _n = "Untitled Game";
+            _p = new();
         }
 
         #region Getters and Setters
 
         public string Name
         {
-            get => name;
-            set => name = value;
+            get => _n;
+            set => _n = value;
+        }
+
+        public string DisplayName
+        {
+            get => _n.Replace('_', ' ');
         }
 
         public List<string> Paths
         {
-            get => paths;
-            set => paths = value;
+            get => _p;
+            set => _p = value;
         }
 
         #endregion

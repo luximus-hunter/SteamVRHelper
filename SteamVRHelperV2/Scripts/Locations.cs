@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
+using System.IO;
 
-namespace SteamVRHelper
+namespace SteamVRHelperV2.Scripts
 {
     internal static class Locations
     {
@@ -8,6 +9,8 @@ namespace SteamVRHelper
         public static string TemplateDirectory = Path.Combine(Root, "TemplateFiles");
 
         public static string BackupExtension = ".backup";
+
+        public static string NoOculusToggle = @".\NoOculusToggle.exe";
 
         #region Steam
 

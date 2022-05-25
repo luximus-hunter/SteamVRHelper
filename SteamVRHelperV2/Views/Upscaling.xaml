@@ -1,0 +1,97 @@
+﻿<Page
+    x:Class="SteamVRHelperV2.Views.Upscaling"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" >
+    <StackPanel Orientation="Vertical" Margin="40,16,0,0">
+        <Border Width="600" Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid>
+                <CheckBox VerticalAlignment="Center" 
+                          HorizontalAlignment="Left"
+                          x:Name="ChbxEnableUpscaling"
+                          Checked="ChbxEnableUpscalingChecked"
+                          Unchecked="ChbxEnableUpscalingUnchecked"
+                          Loaded="ChbxEnableUpscalingLoaded">
+                </CheckBox>
+            </Grid>
+        </Border>
+        <Border Width="600" Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblAlgirithm"/>
+                <ComboBox ItemsSource="{x:Bind Algorithms}"
+                          Width="200"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          VerticalAlignment="Center" 
+                          HorizontalAlignment="Right"
+                          x:Name="CbxAlgorithm"
+                          Loaded="CbxAlgorithmLoaded"
+                          SelectionChanged="CbxAlgorithmChanged"/>
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblScale"/>
+                <Slider Width="200" 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        x:Name="SldScale"
+                        ValueChanged="SldScaleChanged"
+                        Loaded="SldScaleLoaded"/>
+                <TextBlock Grid.Row="2" 
+                           Grid.Column="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblSharpness"/>
+                <Slider Width="200" 
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        x:Name="SldSharpness"
+                        ValueChanged="SldSharpnessChanged"
+                        Loaded="SldSharpnessLoaded"/>
+                <Button Grid.Row="3"
+                        Grid.Column="1"
+                        Width="200"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnApply"
+                        Click="BtnApplyClick"/>
+            </Grid>
+        </Border>
+    </StackPanel>
+</Page>

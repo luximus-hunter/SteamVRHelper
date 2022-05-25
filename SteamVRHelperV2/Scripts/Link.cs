@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SteamVRHelper
+namespace SteamVRHelperV2.Scripts
 {
     internal static class Link
     {

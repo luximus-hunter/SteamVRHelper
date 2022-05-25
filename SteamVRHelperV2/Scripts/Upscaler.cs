@@ -1,4 +1,9 @@
-﻿namespace SteamVRHelper
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace SteamVRHelperV2.Scripts
 {
     internal enum UpscaleAlgorithm
     {
@@ -6,9 +11,6 @@
         NIS = 1
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     internal class Upscaler
     {
         private bool inited;
@@ -19,12 +21,16 @@
         private int sharpness;
         private List<string> config;
 
-        private Library library;
+        private Library _l = new();
 
-        public Upscaler() {
-            Backup();
+        public Upscaler()
+        {
+            if (!BackedUp())
+            {
+                Backup();
+            }
 
-            if(File.Exists(Path.Combine(Locations.OpenvrDllFile)) &&
+            if (File.Exists(Path.Combine(Locations.OpenvrDllFile)) &&
                File.Exists(Path.Combine(Locations.OpenvrConfigFile)))
             {
                 inited = true;
@@ -32,8 +38,6 @@
 
             if (inited)
             {
-                library = new Library();
-
                 config = File.ReadAllLines(Locations.OpenvrConfigFile).ToList();
 
                 #region Read Config
@@ -54,12 +58,54 @@
             }
         }
 
+        public bool BackedUp()
+        {
+            bool backedUp = true;
+
+            foreach (Game game in _l.Games)
+            {
+                foreach (string path in game.Paths)
+                {
+                    string backupFile = Path.Combine(path, Locations.OpenvrDllFileName + Locations.BackupExtension);
+
+                    if (!File.Exists(backupFile))
+                    {
+                        backedUp = false;
+                    }
+                }
+            }
+
+            return backedUp;
+        }
+
+        public bool Enabled()
+        {
+            bool enabled = true;
+
+            foreach (Game game in _l.Games)
+            {
+                foreach (string path in game.Paths)
+                {
+                    string activeFile = Path.Combine(path, Locations.OpenvrDllFileName);
+
+                    if(File.ReadAllLines(activeFile).Length != File.ReadAllLines(Locations.OpenvrDllFile).Length)
+                    {
+                        enabled = false;
+                    }
+                }
+            }
+
+            this.enabled = enabled;
+
+            return enabled;
+        }
+
         /// <summary>
         /// Creates backup files for all games if they don't exist.
         /// </summary>
         public void Backup()
         {
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -91,11 +137,11 @@
             }
             catch (Exception)
             {
-                MessageBox.Show("Couldn't save new config");
+                //MessageBox.Show("Couldn't save new config");
             }
 
             // Add config file to games
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -113,7 +159,7 @@
         {
             Backup();
 
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -131,7 +177,7 @@
         /// </summary>
         public void Disable()
         {
-            foreach (Game game in library.Games)
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -152,9 +198,9 @@
         /// </summary>
         public void Restore()
         {
-            Disable(); 
-            
-            foreach (Game game in library.Games)
+            Disable();
+
+            foreach (Game game in _l.Games)
             {
                 foreach (string path in game.Paths)
                 {
@@ -201,12 +247,6 @@
         public bool Inited
         {
             get => inited;
-        }
-
-        public bool Enabled
-        {
-            get => enabled;
-            set => enabled = value;
         }
 
         public UpscaleAlgorithm Algorithm

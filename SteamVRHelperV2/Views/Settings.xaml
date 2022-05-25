@@ -1,0 +1,102 @@
+﻿<Page
+    x:Class="SteamVRHelperV2.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Orientation="Vertical" Margin="40,16,0,0">
+        <!-- Information -->
+        <Border Width="600" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblAuthor"/>
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="1"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Right"
+                           TextAlignment="Right"
+                           x:Name="LblAuthorName"/>
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblVersion"/>
+                <TextBlock Grid.Row="1" 
+                           Grid.Column="1"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Right"
+                           TextAlignment="Right"
+                           x:Name="LblVersionNumber"/>
+            </Grid>
+        </Border>
+
+        <!-- Revert -->
+        <Border Width="600" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblBackup"/>
+                <Button Grid.Column="1"
+                        Grid.Row="0"
+                        Width="200"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnBackup"
+                        Click="BtnBackupClick"/>
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblRestore"/>
+                <Button Grid.Column="1"
+                        Grid.Row="1"
+                        Width="200"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnRestore"
+                        Click="BtnRestoreClick"/>
+            </Grid>
+        </Border>
+    </StackPanel>
+</Page>

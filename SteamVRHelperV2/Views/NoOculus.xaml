@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="SteamVRHelperV2.Views.NoOculus"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    mc:Ignorable="d">
+
+    <StackPanel Orientation="Vertical" Margin="40,16,0,0">
+        <muxc:InfoBar Width="600"
+                      IsOpen="True"
+                      Severity="Error"
+                      IsClosable="False"
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Left" 
+                      Margin="16"
+                      CornerRadius="8"
+                      BorderThickness="1"
+                      Padding="16"
+                      x:Name="MsgNoOculusBar" />
+        <Border Width="600" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left"
+                           x:Name="LblService"/>
+                <ComboBox ItemsSource="{x:Bind Services}"
+                          Width="200"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          VerticalAlignment="Center" 
+                          HorizontalAlignment="Right"
+                          x:Name="CbxServices"
+                          SelectionChanged="CbxServicesChanged"
+                          Loaded="CbxServicesLoaded"/>
+                <Button Grid.Row="1"
+                        Grid.Column="1"
+                        Width="200"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource AccentButtonStyle}"
+                        x:Name="BtnApply"
+                        Click="BtnApplyClick"/>
+            </Grid>
+        </Border>
+        <Border Width="600" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" 
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                Padding="16"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <Grid RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <CheckBox x:Name="ChbxFixExit"
+                          IsEnabled="False"
+                          Checked="ChbxFixExitChecked"
+                          Unchecked="ChbxFixExitUnchecked"/>
+            </Grid>
+        </Border>
+    </StackPanel>
+</Page>
